@@ -39,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/relativelayout_top"
         android:cacheColorHint="@color/transparent"
-        android:dividerHeight="1.0dp"
         android:divider="@color/divider_bg"
+        android:dividerHeight="1.0dp"
         android:listSelector="@drawable/listview_item_selector" />
 
 </RelativeLayout>
