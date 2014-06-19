@@ -5,6 +5,7 @@
     android:background="@color/info_panel_bg"
     android:orientation="vertical" >
 
+    <!-- 测试代码...... -->
     <RelativeLayout
         android:id="@+id/relativelayout_top"
         android:layout_width="fill_parent"
