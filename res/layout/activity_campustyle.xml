@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/info_panel_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_toolbar" >
+
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4.0dip"
+            android:src="@drawable/return_shouye_background" />
+
+        <TextView
+            android:id="@+id/tv_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="45.0dip"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:paddingTop="10.0dip"
+            android:text="@string/campustyle"
+            android:textColor="#ffffffff"
+            android:textSize="18.0dip" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/relativelayout_top"
+        android:columnWidth="110dp"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10.0dp" />
+
+</RelativeLayout>

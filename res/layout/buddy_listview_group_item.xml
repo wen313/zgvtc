@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8.0dp"
+    android:layout_marginBottom="8.0dp"
+    android:background="@color/info_panel_bg" >
+    <ImageView
+        android:id="@+id/buddy_listview_icon"
+        android:layout_width="60.0dp"
+        android:layout_height="60.0dp"
+        android:layout_marginTop="10.0dp"
+        android:layout_marginBottom="10.0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20.0dp"
+        android:layout_marginRight="20.0dp"
+        android:src="@drawable/achievements" />
+
+    <TextView
+        android:id="@+id/buddy_listview_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20.0dp"
+        android:layout_toRightOf="@id/buddy_listview_icon"
+        android:text="成果展示"
+        android:textSize="@dimen/main_text_size"
+        android:textColor="@color/newsinfotextcolor" />
+    
+    <ImageView
+        android:id="@+id/buddy_listview_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="8dp"
+         />
+
+</RelativeLayout>

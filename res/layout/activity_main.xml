@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/frameLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff" >
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/bg_toolbar" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="1dp"
+            android:gravity="center_horizontal" >
+
+            <FrameLayout
+                android:id="@+id/fl_mynews"
+                android:layout_width="fill_parent"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_bg" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="1.0dip"
+                    android:background="@drawable/tab_btn_mynews" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="6.0dip"
+                    android:text="@string/main_news"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fl_walkintocampus"
+                android:layout_width="fill_parent"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_bg" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="1.0dip"
+                    android:background="@drawable/tab_btn_walkinto_campus" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="6.0dip"
+                    android:text="@string/main_walkinto_campus"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+            
+
+            <FrameLayout
+                android:id="@+id/fl_demonstrationschool"
+                android:layout_width="fill_parent"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_bg" >
+
+                <ImageView
+                    android:id="@+id/image_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="1.0dip"
+                    android:background="@drawable/tab_btn_demonstration_school" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="6.0dip"
+                    android:text="@string/main_demonstration_school"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_shorttermtraining"
+                android:layout_width="fill_parent"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_bg" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="1.0dip"
+                    android:background="@drawable/tab_btn_adult_shortterm_training" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="6.0dip"
+                    android:text="@string/main_shortterm_training"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </FrameLayout>
+            
+            <FrameLayout
+                android:id="@+id/fl_admissionemployment"
+                android:layout_width="fill_parent"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_btn_bg" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="1.0dip"
+                    android:background="@drawable/tab_btn_admission_employment" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="6.0dip"
+                    android:text="@string/main_admission_employment"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

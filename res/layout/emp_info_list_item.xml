@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_wdwz"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white" >
+
+    <LinearLayout
+        android:id="@+id/ll_news_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="21.0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_emp_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我校组织观看  "
+            android:textColor="@color/newsinfotextcolor"
+            android:textSize="20.0dip" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/right_accessory" />
+
+</RelativeLayout>

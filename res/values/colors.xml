@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="info_panel_bg">#ffeeeeee</color>
+    <color name="lightblack">#020202</color>
+    <color name="transparent">#00000000</color>
+    
+    <color name="newsinfotextcolor">#ff000000</color>
+    <color name="newsdatetextcolor">#bb000000</color>
+    
+    <color name="radio_button_selected_color">#ffffffff</color>
+    <color name="radio_button_unselected_color">@android:color/transparent</color>
+    <color name="divider_bg">#c8c7cc</color>
+</resources>

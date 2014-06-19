@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/info_panel_bg"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="80.0dp"
+        android:src="@drawable/loading_image" />
+
+    <TextView
+        android:layout_below="@id/iv_icon"
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+       	android:textColor="@color/newsinfotextcolor"
+        android:text="学校大门" />
+
+</RelativeLayout>

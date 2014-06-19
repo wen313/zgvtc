@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_wdwz"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/info_panel_bg" >
+
+    <LinearLayout
+        android:id="@+id/ll_news_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:orientation="horizontal" >
+			<TextView
+                android:id="@+id/tv_news_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="30dp"
+                android:visibility="gone"
+                android:textColor="@color/newsdatetextcolor"
+                android:textSize="@dimen/mid_text_size" />
+			
+            <TextView
+                android:id="@+id/tv_news_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="30dp"
+                android:text="2014-06-01"
+                android:textColor="@color/newsdatetextcolor"
+                android:textSize="@dimen/mid_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tv_news_title"
+               	android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我校组织观看 阳光下的黑幕  我校组织观看 阳光下的黑幕  "
+                android:textColor="@color/newsinfotextcolor"
+                android:textSize="@dimen/main_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/right_accessory" />
+
+</RelativeLayout>
