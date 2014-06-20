@@ -5,15 +5,16 @@ import java.io.File;
 import android.content.Context;
 import android.os.Environment;
 
+import com.zgvtc.base.BaseApplication;
 import com.zgvtc.nets.NetworkUtils;
 
 public class AppApplication extends BaseApplication {
 	public static final String DOMAIN = "domain";
 	public static final String DOMAIN_URL = "url";
-	public static String mDomain = "http://www.kaiyuanxiangmu.com/";
-	public static String mBakeDomain = "http://1.kaiyuanxiangmu.sinaapp.com/";
+	public static String mDomain = Constant.WEBVIE_WBASEURL;
+	//public static String mBakeDomain = "http://1.kaiyuanxiangmu.sinaapp.com/";
 
-	private static final String DB_NAME = "healthworld.db";
+	private static final String DB_NAME = Constant.APPNAME+".db";
 
 	public static String mSdcardDataDir;
 	public static String mApkDownloadUrl = null;
@@ -33,12 +34,12 @@ public class AppApplication extends BaseApplication {
 	@Override
 	public void initEnv() {
 		// TODO Auto-generated method stub
-		mAppName = "healthworld";
-		mDownloadPath = "/healthworld/download";
+		mAppName = Constant.APPNAME;
+		mDownloadPath = "/"+Constant.APPNAME+"/download";
 		if (Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
 			File file = new File(Environment.getExternalStorageDirectory()
-					.getPath() + "/healthworld/config/");
+					.getPath() + "/"+Constant.APPNAME+"/config/");
 			if (!file.exists()) {
 				if (file.mkdirs()) {
 					mSdcardDataDir = file.getAbsolutePath();

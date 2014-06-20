@@ -24,7 +24,7 @@ public class ShorttermTrainFragment extends Fragment {
 	private String TAG = "ShorttermTrainFragment";
 	private ExpandableListView elv_shorttermtrain;
 	private List<Map<String, Object>> group = null;
-	// ×ÓÏîÄ¿
+	// å­é¡¹ç›®
 	private List<List<Map<String, Object>>> buddy = null;
 
 	@Override
@@ -44,40 +44,40 @@ public class ShorttermTrainFragment extends Fragment {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("img", R.drawable.work_collection);
-		map.put("name", "¹¤×÷¼¯½õ");
+		map.put("name", "å·¥ä½œé›†é”¦");
 		map.put("id", 35);
 		group.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.admission_counsel);
-		map.put("name", "ÕĞÉúĞû´«×ÉÑ¯");
+		map.put("name", "æ‹›ç”Ÿå®£ä¼ å’¨è¯¢");
 		group.add(map);
 
-		buddy = new ArrayList<List<Map<String,Object>>>();
-		//À¸Ä¿Ò»
-		List<Map<String,Object>> child = new ArrayList<Map<String, Object>>();
+		buddy = new ArrayList<List<Map<String, Object>>>();
+		// æ ç›®ä¸€
+		List<Map<String, Object>> child = new ArrayList<Map<String, Object>>();
 		buddy.add(child);
-		
-		//À¸Ä¿¶ş
+
+		// æ ç›®äºŒ
 		child = new ArrayList<Map<String, Object>>();
 		Map<String, Object> childmap = new HashMap<String, Object>();
-		childmap.put("title", "Ñ§Àú½ÌÓı");
+		childmap.put("title", "å­¦å†æ•™è‚²");
 		childmap.put("id", 29);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "·ÇÑ§Àú½ÌÓı");
+		childmap.put("title", "éå­¦å†æ•™è‚²");
 		childmap.put("id", 30);
 		child.add(childmap);
-		
+
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "ÕĞÉú×¨Òµ");
+		childmap.put("title", "æ‹›ç”Ÿä¸“ä¸š");
 		childmap.put("id", 31);
 		child.add(childmap);
-		
+
 		buddy.add(child);
-		
-//		buddy = new String[][] { {}, { "Ñ§Àú½ÌÓı", "·ÇÑ§Àú½ÌÓı", "ÕĞÉú×¨Òµ" } };
+
+		// buddy = new String[][] { {}, { "å­¦å†æ•™è‚²", "éå­¦å†æ•™è‚²", "æ‹›ç”Ÿä¸“ä¸š" } };
 	}
 
 	private void setUpView(View view) {
@@ -86,42 +86,49 @@ public class ShorttermTrainFragment extends Fragment {
 		ExpandableListAdapter adapter = new BuddyAdapter(getActivity(), group,
 				buddy);
 		elv_shorttermtrain.setAdapter(adapter);
-//		elv_shorttermtrain.setChildDivider(getResources().getDrawable(
-//				R.drawable.iteminfo_divider));
-		elv_shorttermtrain.setGroupIndicator(null);// ½«¿Ø¼şÄ¬ÈÏµÄ×ó±ß¼ıÍ·È¥µô
+		// elv_shorttermtrain.setChildDivider(getResources().getDrawable(
+		// R.drawable.iteminfo_divider));
+		elv_shorttermtrain.setGroupIndicator(null);// å°†æ§ä»¶é»˜è®¤çš„å·¦è¾¹ç®­å¤´å»æ‰
 
-		// ×ÓÏîµ¥»÷
+		// å­é¡¹å•å‡»
 		elv_shorttermtrain.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, "×ÓÏî±»µã»÷");
-				Log.d(TAG, "¸¸Ïî:"+groupPosition+",×ÓÏî£º"+childPosition);
+				Log.d(TAG, "å­é¡¹è¢«ç‚¹å‡»");
+				Log.d(TAG, "çˆ¶é¡¹:" + groupPosition + ",å­é¡¹ï¼š" + childPosition);
 				Intent it = null;
-				if(groupPosition!=0){//²»ÊÇµÚÒ»Ïî
-					Map<String,Object> childitem = buddy.get(groupPosition).get(childPosition);
+				if (groupPosition != 0) {// ä¸æ˜¯ç¬¬ä¸€é¡¹
+					Map<String, Object> childitem = buddy.get(groupPosition)
+							.get(childPosition);
 					it = new Intent(getActivity(), NewsTitleActivity.class);
-					it.putExtra("newsTitleUrl", "adultshorttermtraining/shorttrain_item_list/"+childitem.get("id")+"/");
+					it.putExtra("newsTitleUrl",
+							"adultshorttermtraining/shorttrain_item_list/"
+									+ childitem.get("id") + "/");
 					it.putExtra("title", childitem.get("title").toString());
 					getActivity().startActivity(it);
 				}
 				return false;
 			}
 		});
-		
-		//×éµã»÷ÊÂ¼ş
+
+		// ç»„ç‚¹å‡»äº‹ä»¶
 		elv_shorttermtrain.setOnGroupClickListener(new OnGroupClickListener() {
-			
+
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, "group:"+groupPosition);
-				if(groupPosition==0){//µÚÒ»Ïîµã»÷¾Íµ½´ïÍ¼Æ¬Ò³Ãæ
-					Map<String,Object> groupItem = (Map<String, Object>) group.get(groupPosition);
-					Intent it = new Intent(getActivity(), NewsTitleActivity.class);
-					it.putExtra("newsTitleUrl", "adultshorttermtraining/shorttrain_item_list/"+groupItem.get("id")+"/");
+				Log.d(TAG, "group:" + groupPosition);
+				if (groupPosition == 0) {// ç¬¬ä¸€é¡¹ç‚¹å‡»å°±åˆ°è¾¾å›¾ç‰‡é¡µé¢
+					Map<String, Object> groupItem = (Map<String, Object>) group
+							.get(groupPosition);
+					Intent it = new Intent(getActivity(),
+							NewsTitleActivity.class);
+					it.putExtra("newsTitleUrl",
+							"adultshorttermtraining/shorttrain_item_list/"
+									+ groupItem.get("id") + "/");
 					it.putExtra("title", groupItem.get("name").toString());
 					getActivity().startActivity(it);
 				}

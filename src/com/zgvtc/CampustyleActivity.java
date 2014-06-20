@@ -49,7 +49,7 @@ public class CampustyleActivity extends Activity {
 	private String url;
 	private String title;
 	GridViewAdapter adapter;
-	private List<NewsTitlePicBean> contents = new ArrayList<NewsTitlePicBean>();// ĞÂÎÅ±êÌâ
+	private List<NewsTitlePicBean> contents = new ArrayList<NewsTitlePicBean>();// æ–°é—»æ ‡é¢˜
 
 	private Toast mToast;
 
@@ -86,24 +86,24 @@ public class CampustyleActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-//				NewsTitlePicBean ntpb = contents.get(position);
-//				String imageUrl = ntpb.getNewstext();
-//				Intent it = new Intent(CampustyleActivity.this,
-//						CampusStyleImgDetailActivity.class);
-//				it.putExtra("title", ntpb.getTitle());
-//				it.putExtra("ImgUrl", ntpb.getNewstext());
+				// NewsTitlePicBean ntpb = contents.get(position);
+				// String imageUrl = ntpb.getNewstext();
+				// Intent it = new Intent(CampustyleActivity.this,
+				// CampusStyleImgDetailActivity.class);
+				// it.putExtra("title", ntpb.getTitle());
+				// it.putExtra("ImgUrl", ntpb.getNewstext());
 				Intent it = new Intent(CampustyleActivity.this,
 						CampusStyleImgDetailActivity.class);
-				List<Map<String,String>> list1=new ArrayList<Map<String,String>>();
-				for (NewsTitlePicBean ntpb: contents) {
-					Map<String,String> map = new HashMap<>();
+				List<Map<String, String>> list1 = new ArrayList<Map<String, String>>();
+				for (NewsTitlePicBean ntpb : contents) {
+					Map<String, String> map = new HashMap<>();
 					map.put("title", ntpb.getTitle());
 					map.put("ImageUrl", ntpb.getNewstext());
 					list1.add(map);
 				}
-				Bundle bundle=new Bundle();
-				bundle.putParcelableArrayList("contents", (ArrayList)list1);
-                it.putExtras(bundle);
+				Bundle bundle = new Bundle();
+				bundle.putParcelableArrayList("contents", (ArrayList) list1);
+				it.putExtras(bundle);
 				it.putExtra("index", position);
 				CampustyleActivity.this.startActivity(it);
 			}
@@ -118,8 +118,9 @@ public class CampustyleActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.onFailure(statusCode, error, content);
 				showToast(Constant.WARNING);
-				Log.d(LOG_TAG, "´íÎóÂë£º" + statusCode + ",´íÎó£º" + error.getMessage()
-						+ ",ÄÚÈİ£º" + content);
+				Log.d(LOG_TAG,
+						"é”™è¯¯ç ï¼š" + statusCode + ",é”™è¯¯ï¼š" + error.getMessage()
+								+ ",å†…å®¹ï¼š" + content);
 			}
 
 			@Override
@@ -137,7 +138,7 @@ public class CampustyleActivity extends Activity {
 	}
 
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */
@@ -155,7 +156,7 @@ public class CampustyleActivity extends Activity {
 		private LayoutInflater mInflater;
 		private List<NewsTitlePicBean> contents;
 		private Context context;
-		// ´ÓÄÚ´æ»º´æÖĞ»ñÈ¡Í¼Æ¬
+		// ä»å†…å­˜ç¼“å­˜ä¸­è·å–å›¾ç‰‡
 		ImageMemoryCache memoryCache;
 		ImageFileCache fileCache;
 		private AsyncImageLoader asyncImageLoader;
@@ -220,13 +221,13 @@ public class CampustyleActivity extends Activity {
 			}
 			NewsTitlePicBean ntpb = contents.get(position);
 			String imageUrl = ntpb.getTitlepic();
-			// ÄÚ´æ¼ÓÔØ
+			// å†…å­˜åŠ è½½
 			Bitmap result = memoryCache.getBitmapFromCache(imageUrl);
 			holder.iv_icon.setTag(imageUrl);
 			if (result == null) {
-				// ÎÄ¼ş»º´æÖĞ»ñÈ¡
+				// æ–‡ä»¶ç¼“å­˜ä¸­è·å–
 				result = fileCache.getImage(imageUrl);
-				if (result == null) {// ÍøÂç»ñÈ¡
+				if (result == null) {// ç½‘ç»œè·å–
 					result = asyncImageLoader.loadDrawable(imageUrl,
 							new ImageCallback() {
 								public void imageLoaded(Bitmap imageBitmap,
@@ -245,16 +246,16 @@ public class CampustyleActivity extends Activity {
 							});
 				}
 			} else {
-				// Ìí¼Óµ½ÄÚ´æ»º´æ
+				// æ·»åŠ åˆ°å†…å­˜ç¼“å­˜
 				memoryCache.addBitmapToCache(imageUrl, result);
 			}
 			if (result == null) {
-				holder.iv_icon.setImageResource(R.drawable.loading_image);// Ìæ»»³É¼ÓÔØµÄÖĞµÄÍ¼Æ¬
+				holder.iv_icon.setImageResource(R.drawable.loading_image);// æ›¿æ¢æˆåŠ è½½çš„ä¸­çš„å›¾ç‰‡
 			} else {
 				holder.iv_icon.setImageBitmap(result);
 			}
 			// Set the text on the TextView
-			// ¼ÓÔØÍ¼Æ¬
+			// åŠ è½½å›¾ç‰‡
 			holder.tv_title.setText(ntpb.getTitle());
 			return convertView;
 		}

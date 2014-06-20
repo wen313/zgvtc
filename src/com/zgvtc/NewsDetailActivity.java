@@ -31,9 +31,9 @@ public class NewsDetailActivity extends Activity {
 	private WebView webview;
 	private ProgressBar pb;
 	private ImageView iv_return;
-	private String date;// ĞÂÎÅÊ±¼ä·¢²¼Ê±¼ä
-	private String title;// ĞÂÎÅ±êÌâ
-	
+	private String date;// æ–°é—»æ—¶é—´å‘å¸ƒæ—¶é—´
+	private String title;// æ–°é—»æ ‡é¢˜
+
 	private Toast mToast;
 
 	// private ArrayList<>
@@ -77,19 +77,19 @@ public class NewsDetailActivity extends Activity {
 
 		WebSettings localWebSettings = webview.getSettings();
 		localWebSettings.setJavaScriptEnabled(true);
-		localWebSettings.setSupportZoom(true);//¿ÉÒÔËõ·Å
+		localWebSettings.setSupportZoom(true);// å¯ä»¥ç¼©æ”¾
 		localWebSettings.setBuiltInZoomControls(false);
 		localWebSettings.setPluginState(WebSettings.PluginState.ON);
 		localWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		this.webview.setScrollBarStyle(0);
-		this.webview.setInitialScale(100);//³õÊ¼ÏÔÊ¾±ÈÀı100%
-		
+		this.webview.setInitialScale(100);// åˆå§‹æ˜¾ç¤ºæ¯”ä¾‹100%
+
 		this.webview.setWebViewClient(new myWebViewClient());
 		this.webview.setWebChromeClient(new myWebChromeClient());
 	}
 
 	void getData(String url) {
-		Log.d(TAG, "urlµØÖ·£º" + url);
+		Log.d(TAG, "urlåœ°å€ï¼š" + url);
 		HttpUtil.get(url, null, new JsonHttpResponseHandler() {
 			@Override
 			public void onFailure(int statusCode, Throwable error,
@@ -97,8 +97,8 @@ public class NewsDetailActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.onFailure(statusCode, error, content);
 				showToast(Constant.WARNING);
-				Log.d(TAG, "´íÎóÂë£º" + statusCode + ",´íÎó£º" + error.getMessage()
-						+ ",ÄÚÈİ£º" + content);
+				Log.d(TAG, "é”™è¯¯ç ï¼š" + statusCode + ",é”™è¯¯ï¼š" + error.getMessage()
+						+ ",å†…å®¹ï¼š" + content);
 			}
 
 			@Override
@@ -109,29 +109,30 @@ public class NewsDetailActivity extends Activity {
 					String content = URLDecoder.decode(response
 							.getString("newstext"));
 					String writer = URLDecoder.decode(response
-							.getString("writer"));// ×÷Õß
+							.getString("writer"));// ä½œè€…
 					String befrom = URLDecoder.decode(response
-							.getString("befrom"));// À´Ô´
+							.getString("befrom"));// æ¥æº
 					String viewhtml = getFromAssets(Constant.VIEWHTML);
-					Log.d(TAG, "htmlÄÚÈİ£º" + content);
-					
-					//¸ñÊ½Ìæ»»
-					content = content.replaceAll("<p>&nbsp;</p>", "</br>")
-							.replaceAll("<div>&nbsp;", "<div>&nbsp;&nbsp;&nbsp;")
+					Log.d(TAG, "htmlå†…å®¹ï¼š" + content);
+
+					// æ ¼å¼æ›¿æ¢
+					content = content
+							.replaceAll("<p>&nbsp;</p>", "</br>")
+							.replaceAll("<div>&nbsp;",
+									"<div>&nbsp;&nbsp;&nbsp;")
 							.replaceAll("\\\\", "");
-					
-					// Ìæ»»ÄÚÈİ Ê±¼ä ×÷Õß À´Ô´
+
+					// æ›¿æ¢å†…å®¹ æ—¶é—´ ä½œè€… æ¥æº
 					viewhtml = viewhtml.replace("Loading...", content)
 							.replace("**[time]**", date)
 							.replace("**[author]**", writer)
 							.replace("**[source]**", befrom)
 							.replace("**[title]**", title);
-					
-							
+
 					InitWebView();
 					NewsDetailActivity.this.webview.loadData(viewhtml,
 							"text/html", "utf-8");
-					Log.d(TAG, "Ìæ»»ºó£º" + viewhtml);
+					Log.d(TAG, "æ›¿æ¢åï¼š" + viewhtml);
 
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -177,9 +178,9 @@ public class NewsDetailActivity extends Activity {
 		}
 
 	}
-	
+
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */
@@ -194,7 +195,7 @@ public class NewsDetailActivity extends Activity {
 	}
 
 	/**
-	 * »ñÈ¡AssetsÏÂµÄÎÄ¼ş
+	 * è·å–Assetsä¸‹çš„æ–‡ä»¶
 	 * 
 	 * @param fileName
 	 * @return

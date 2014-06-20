@@ -1,4 +1,4 @@
-package com.zgvtc.util;
+package com.zgvtc.base;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,10 @@ public abstract class BaseApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		fillTabs();
-		initDb();
+		//fillTabs();
+		//initDb();
 		initEnv();
-		initLocalVersion();
+		//initLocalVersion();
 	}
 
 	public List<Class<?>> getTabActivitys() {

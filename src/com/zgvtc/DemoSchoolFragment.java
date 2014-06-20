@@ -45,86 +45,85 @@ public class DemoSchoolFragment extends Fragment {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("img", R.drawable.key_majors);
-		map.put("name", "ÖØµã×¨Òµ½¨Éè");
+		map.put("name", "é‡ç‚¹ä¸“ä¸šå»ºè®¾");
 		group.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.featured_projects);
-		map.put("name", "ÌØÉ«ÏîÄ¿½¨Éè");
+		map.put("name", "ç‰¹è‰²é¡¹ç›®å»ºè®¾");
 		group.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.achievements);
-		map.put("name", "³É¹ûÕ¹Ê¾");
+		map.put("name", "æˆæœå±•ç¤º");
 		group.add(map);
 
-		buddy = new ArrayList<List<Map<String,Object>>>();
-		List<Map<String,Object>> child = new ArrayList<Map<String, Object>>();
+		buddy = new ArrayList<List<Map<String, Object>>>();
+		List<Map<String, Object>> child = new ArrayList<Map<String, Object>>();
 
-		//À¸Ä¿Ò»
+		// æ ç›®ä¸€
 		Map<String, Object> childmap = new HashMap<String, Object>();
-		childmap.put("title", "»úĞµ¼Ó¹¤¼¼Êõ");
+		childmap.put("title", "æœºæ¢°åŠ å·¥æŠ€æœ¯");
 		childmap.put("id", 85);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "Æû³µÔËÓÃÓÚÎ¬ĞŞ");
+		childmap.put("title", "æ±½è½¦è¿ç”¨äºç»´ä¿®");
 		childmap.put("id", 86);
 		child.add(childmap);
-		
+
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "ĞóÄÁÊŞÒ½");
+		childmap.put("title", "ç•œç‰§å…½åŒ»");
 		childmap.put("id", 87);
 		child.add(childmap);
-		
+
 		buddy.add(child);
-		
-		//À¸Ä¿¶ş
+
+		// æ ç›®äºŒ
 		child = new ArrayList<Map<String, Object>>();
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "ÏîÄ¿½éÉÜ");
+		childmap.put("title", "é¡¹ç›®ä»‹ç»");
 		childmap.put("id", 118);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "ÊµÊ©·½°¸");
+		childmap.put("title", "å®æ–½æ–¹æ¡ˆ");
 		childmap.put("id", 119);
 		child.add(childmap);
-		
+
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "½¨Éè¶¯Ì¬");
-		childmap.put("id",120);
+		childmap.put("title", "å»ºè®¾åŠ¨æ€");
+		childmap.put("id", 120);
 		child.add(childmap);
-		
+
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "³É¹ûÕ¹Ê¾");
+		childmap.put("title", "æˆæœå±•ç¤º");
 		childmap.put("id", 121);
 		child.add(childmap);
-		
+
 		buddy.add(child);
-		
-		//À¸Ä¿Èı
+
+		// æ ç›®ä¸‰
 		child = new ArrayList<Map<String, Object>>();
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "Îï»¯³É¹û");
+		childmap.put("title", "ç‰©åŒ–æˆæœ");
 		childmap.put("id", 118);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "·ÇÎï»¯³É¹û");
+		childmap.put("title", "éç‰©åŒ–æˆæœ");
 		childmap.put("id", 119);
 		child.add(childmap);
-		
+
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "½×¶Î³É¹û");
-		childmap.put("id",120);
+		childmap.put("title", "é˜¶æ®µæˆæœ");
+		childmap.put("id", 120);
 		child.add(childmap);
-		
+
 		buddy.add(child);
-		
-		
-//		buddy = new String[][] { { "»úĞµ¼Ó¹¤¼¼Êõ", "Æû³µÔËÓÃÓÚÎ¬ĞŞ", "ĞóÄÁÊŞÒ½" },
-//				{ "ÏîÄ¿½éÉÜ", "ÊµÊ©·½°¸", "½¨Éè¶¯Ì¬", "³É¹ûÕ¹Ê¾" }, { "Îï»¯³É¹û", "·ÇÎï»¯³É¹û", "½×¶Î³É¹û" } };
+
+		// buddy = new String[][] { { "æœºæ¢°åŠ å·¥æŠ€æœ¯", "æ±½è½¦è¿ç”¨äºç»´ä¿®", "ç•œç‰§å…½åŒ»" },
+		// { "é¡¹ç›®ä»‹ç»", "å®æ–½æ–¹æ¡ˆ", "å»ºè®¾åŠ¨æ€", "æˆæœå±•ç¤º" }, { "ç‰©åŒ–æˆæœ", "éç‰©åŒ–æˆæœ", "é˜¶æ®µæˆæœ" } };
 	}
 
 	private void setUpView(View view) {
@@ -133,26 +132,29 @@ public class DemoSchoolFragment extends Fragment {
 		ExpandableListAdapter adapter = new BuddyAdapter(getActivity(), group,
 				buddy);
 		elv_demoschool.setAdapter(adapter);
-//		elv_demoschool.setChildDivider(getResources().getDrawable(
-//				R.drawable.iteminfo_divider));
-		elv_demoschool.setGroupIndicator(null);// ½«¿Ø¼şÄ¬ÈÏµÄ×ó±ß¼ıÍ·È¥µô
+		// elv_demoschool.setChildDivider(getResources().getDrawable(
+		// R.drawable.iteminfo_divider));
+		elv_demoschool.setGroupIndicator(null);// å°†æ§ä»¶é»˜è®¤çš„å·¦è¾¹ç®­å¤´å»æ‰
 
-		// ×ÓÏîµ¥»÷
+		// å­é¡¹å•å‡»
 		elv_demoschool.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, "×ÓÏî±»µã»÷");
-				Log.d(TAG, "¸¸Ïî:"+groupPosition+",×ÓÏî£º"+childPosition);
-				Map<String,Object> childitem = buddy.get(groupPosition).get(childPosition);
+				Log.d(TAG, "å­é¡¹è¢«ç‚¹å‡»");
+				Log.d(TAG, "çˆ¶é¡¹:" + groupPosition + ",å­é¡¹ï¼š" + childPosition);
+				Map<String, Object> childitem = buddy.get(groupPosition).get(
+						childPosition);
 				Intent it = null;
-				if(groupPosition!=0){//²»ÊÇµÚÒ»Ïî
+				if (groupPosition != 0) {// ä¸æ˜¯ç¬¬ä¸€é¡¹
 					it = new Intent(getActivity(), NewsTitleActivity.class);
-					it.putExtra("newsTitleUrl", "demonstrationschool/demonstration_item_list/"+childitem.get("id")+"/");
+					it.putExtra("newsTitleUrl",
+							"demonstrationschool/demonstration_item_list/"
+									+ childitem.get("id") + "/");
 					it.putExtra("title", childitem.get("title").toString());
 					getActivity().startActivity(it);
-				}else{
+				} else {
 					it = new Intent(getActivity(), BuildDetailActivity.class);
 					it.putExtra("title", childitem.get("title").toString());
 					it.putExtra("classid", childitem.get("id").toString());

@@ -16,7 +16,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
-//ÎÄ¼ş»º´æ£¬»º´æµ½SD¿¨ÉÏ
+//æ–‡ä»¶ç¼“å­˜ï¼Œç¼“å­˜åˆ°SDå¡ä¸Š
 public class ImageFileCache {
 	private static final String CACHDIR = Constant.APPNAME+"/ImgCach";
 	private static final String WHOLESALE_CONV = ".cach";
@@ -26,11 +26,11 @@ public class ImageFileCache {
 	private static final int FREE_SD_SPACE_NEEDED_TO_CACHE = 10;
 
 	public ImageFileCache() {
-		// ÇåÀíÎÄ¼ş»º´æ
+		// æ¸…ç†æ–‡ä»¶ç¼“å­˜
 		removeCache(getDirectory());
 	}
 
-	/** ´Ó»º´æÖĞ»ñÈ¡Í¼Æ¬ **/
+	/** ä»ç¼“å­˜ä¸­è·å–å›¾ç‰‡ **/
 	public Bitmap getImage(final String url) {
 		final String path = getDirectory() + "/" + convertUrlToFileName(url);
 		File file = new File(path);
@@ -46,14 +46,14 @@ public class ImageFileCache {
 		return null;
 	}
 
-	/** ½«Í¼Æ¬´æÈëÎÄ¼ş»º´æ **/
+	/** å°†å›¾ç‰‡å­˜å…¥æ–‡ä»¶ç¼“å­˜ **/
 	public void saveBitmap(Bitmap bm, String url) {
 		if (bm == null) {
 			return;
 		}
-		// ÅĞ¶ÏsdcardÉÏµÄ¿Õ¼ä
+		// åˆ¤æ–­sdcardä¸Šçš„ç©ºé—´
 		if (FREE_SD_SPACE_NEEDED_TO_CACHE > freeSpaceOnSd()) {
-			// SD¿Õ¼ä²»×ã
+			// SDç©ºé—´ä¸è¶³
 			return;
 		}
 		String filename = convertUrlToFileName(url);
@@ -77,9 +77,9 @@ public class ImageFileCache {
 	}
 
 	/**
-	 * ¼ÆËã´æ´¢Ä¿Â¼ÏÂµÄÎÄ¼ş´óĞ¡£¬
-	 * µ±ÎÄ¼ş×Ü´óĞ¡´óÓÚ¹æ¶¨µÄCACHE_SIZE»òÕßsdcardÊ£Óà¿Õ¼äĞ¡ÓÚFREE_SD_SPACE_NEEDED_TO_CACHEµÄ¹æ¶¨
-	 * ÄÇÃ´É¾³ı40%×î½üÃ»ÓĞ±»Ê¹ÓÃµÄÎÄ¼ş
+	 * è®¡ç®—å­˜å‚¨ç›®å½•ä¸‹çš„æ–‡ä»¶å¤§å°ï¼Œ
+	 * å½“æ–‡ä»¶æ€»å¤§å°å¤§äºè§„å®šçš„CACHE_SIZEæˆ–è€…sdcardå‰©ä½™ç©ºé—´å°äºFREE_SD_SPACE_NEEDED_TO_CACHEçš„è§„å®š
+	 * é‚£ä¹ˆåˆ é™¤40%æœ€è¿‘æ²¡æœ‰è¢«ä½¿ç”¨çš„æ–‡ä»¶
 	 */
 	private boolean removeCache(String dirPath) {
 		File dir = new File(dirPath);
@@ -118,14 +118,14 @@ public class ImageFileCache {
 		return true;
 	}
 
-	/** ĞŞ¸ÄÎÄ¼şµÄ×îºóĞŞ¸ÄÊ±¼ä **/
+	/** ä¿®æ”¹æ–‡ä»¶çš„æœ€åä¿®æ”¹æ—¶é—´ **/
 	public void updateFileTime(String path) {
 		File file = new File(path);
 		long newModifiedTime = System.currentTimeMillis();
 		file.setLastModified(newModifiedTime);
 	}
 
-	/** ¼ÆËãsdcardÉÏµÄÊ£Óà¿Õ¼ä **/
+	/** è®¡ç®—sdcardä¸Šçš„å‰©ä½™ç©ºé—´ **/
 	private int freeSpaceOnSd() {
 		StatFs stat = new StatFs(Environment.getExternalStorageDirectory()
 				.getPath());
@@ -134,25 +134,25 @@ public class ImageFileCache {
 		return (int) sdFreeMB;
 	}
 
-	/** ½«url×ª³ÉÎÄ¼şÃû **/
+	/** å°†urlè½¬æˆæ–‡ä»¶å **/
 	private String convertUrlToFileName(String url) {
 		String[] strs = url.split("/");
 		return strs[strs.length - 1] + WHOLESALE_CONV;
 	}
 
-	/** »ñµÃ»º´æÄ¿Â¼ **/
+	/** è·å¾—ç¼“å­˜ç›®å½• **/
 	private String getDirectory() {
 		String dir = getSDPath() + "/" + CACHDIR;
 		return dir;
 	}
 
-	/** È¡SD¿¨Â·¾¶ **/
+	/** å–SDå¡è·¯å¾„ **/
 	private String getSDPath() {
 		File sdDir = null;
 		boolean sdCardExist = Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED); // ÅĞ¶Ïsd¿¨ÊÇ·ñ´æÔÚ
+				android.os.Environment.MEDIA_MOUNTED); // åˆ¤æ–­sdå¡æ˜¯å¦å­˜åœ¨
 		if (sdCardExist) {
-			sdDir = Environment.getExternalStorageDirectory(); // »ñÈ¡¸ùÄ¿Â¼
+			sdDir = Environment.getExternalStorageDirectory(); // è·å–æ ¹ç›®å½•
 		}
 		if (sdDir != null) {
 			return sdDir.toString();
@@ -162,7 +162,7 @@ public class ImageFileCache {
 	}
 
 	/**
-	 * ¸ù¾İÎÄ¼şµÄ×îºóĞŞ¸ÄÊ±¼ä½øĞĞÅÅĞò
+	 * æ ¹æ®æ–‡ä»¶çš„æœ€åä¿®æ”¹æ—¶é—´è¿›è¡Œæ’åº
 	 */
 	private class FileLastModifSort implements Comparator<File> {
 		public int compare(File arg0, File arg1) {

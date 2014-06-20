@@ -38,7 +38,7 @@ public class CampusStyleImgDetailActivity extends Activity implements
 	private ImageView iv_imgDetail;
 	private TextView tv_index;
 	private int index;
-	private ArrayList contents;// ĞÂÎÅ±êÌâ
+	private ArrayList contents;// æ–°é—»æ ‡é¢˜
 
 	private Matrix matrix = new Matrix();
 	private Matrix savedMatrix = new Matrix();
@@ -46,7 +46,7 @@ public class CampusStyleImgDetailActivity extends Activity implements
 	static final int DRAG = 1;
 	static final int ZOOM = 2;
 	int mode = NONE;
-	private boolean flag = false;//Õæ±íÊ¾»¬¶¯£¬¼Ù±íÊ¾Ö»ÊÇÒÆ¶¯
+	private boolean flag = false;// çœŸè¡¨ç¤ºæ»‘åŠ¨ï¼Œå‡è¡¨ç¤ºåªæ˜¯ç§»åŠ¨
 
 	// Remember some things for zooming
 	PointF start = new PointF();
@@ -57,14 +57,14 @@ public class CampusStyleImgDetailActivity extends Activity implements
 	private int width;
 	private int height;
 
-	// ´ÓÄÚ´æ»º´æÖĞ»ñÈ¡Í¼Æ¬
+	// ä»å†…å­˜ç¼“å­˜ä¸­è·å–å›¾ç‰‡
 	ImageMemoryCache memoryCache;
-	// ÎÄ¼şÖĞ»ñÈ¡Í¼Æ¬
+	// æ–‡ä»¶ä¸­è·å–å›¾ç‰‡
 	ImageFileCache fileCache;
 
 	private AsyncImageLoader asyncImageLoader;
 
-	private GestureDetector gd;// ÓÃÓÚ²¶×½touchµÄÏêÏ¸ÊÖÊÆ£¨gesture£©
+	private GestureDetector gd;// ç”¨äºæ•æ‰touchçš„è¯¦ç»†æ‰‹åŠ¿ï¼ˆgestureï¼‰
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +73,12 @@ public class CampusStyleImgDetailActivity extends Activity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.campustyle_img_detail);
 		Intent it = getIntent();
-		Bundle bundle=it.getExtras();
+		Bundle bundle = it.getExtras();
 		contents = bundle.getParcelableArrayList("contents");
 		index = it.getIntExtra("index", 0);
-		Log.d(LOG_TAG, "Ë÷Òı£º"+index+",ÄÚÈİ£º"+contents.toString());
-		// ¼ÓÔØÍ¼Æ¬
-		// ÄÚ´æ¼ÓÔØ
+		Log.d(LOG_TAG, "ç´¢å¼•ï¼š" + index + ",å†…å®¹ï¼š" + contents.toString());
+		// åŠ è½½å›¾ç‰‡
+		// å†…å­˜åŠ è½½
 		memoryCache = new ImageMemoryCache(this);
 		fileCache = new ImageFileCache();
 		asyncImageLoader = new AsyncImageLoader();
@@ -103,26 +103,26 @@ public class CampusStyleImgDetailActivity extends Activity implements
 				CampusStyleImgDetailActivity.this.finish();
 			}
 		});
-		gd = new GestureDetector(this, new GDetector());// ÊÖÊÆ¼àÌı
+		gd = new GestureDetector(this, new GDetector());// æ‰‹åŠ¿ç›‘å¬
 	}
 
 	private void getImage() {
-		Map<String,String> map = (Map<String, String>) contents.get(index);
+		Map<String, String> map = (Map<String, String>) contents.get(index);
 		tv_title.setText(map.get("title"));
-		tv_index.setText((index+1)+" / "+contents.size());
+		tv_index.setText((index + 1) + " / " + contents.size());
 		String ImgUrl = map.get("ImageUrl");
 		Matrix mt = new Matrix();
-		Log.d(LOG_TAG, "¸ß¶È£º" + height + ",¿í¶È£º" + width);
+		Log.d(LOG_TAG, "é«˜åº¦ï¼š" + height + ",å®½åº¦ï¼š" + width);
 		mt.postScale(1.8f, 1.5f);
 		mt.postTranslate(0, height / 4);
 		iv_imgDetail.setImageMatrix(mt);
 		Bitmap result = memoryCache.getBitmapFromCache(ImgUrl);
 		iv_imgDetail.setTag(ImgUrl);
-		Log.d(LOG_TAG, "ImageUrlµØÖ·£º" + ImgUrl);
+		Log.d(LOG_TAG, "ImageUrlåœ°å€ï¼š" + ImgUrl);
 		if (result == null) {
-			// ÎÄ¼ş»º´æÖĞ»ñÈ¡
+			// æ–‡ä»¶ç¼“å­˜ä¸­è·å–
 			result = fileCache.getImage(ImgUrl);
-			if (result == null) {// ÍøÂç»ñÈ¡
+			if (result == null) {// ç½‘ç»œè·å–
 				result = asyncImageLoader.loadDrawable(ImgUrl,
 						new ImageCallback() {
 							public void imageLoaded(Bitmap imageBitmap,
@@ -134,12 +134,12 @@ public class CampusStyleImgDetailActivity extends Activity implements
 						});
 			}
 		} else {
-			// Ìí¼Óµ½ÄÚ´æ»º´æ
+			// æ·»åŠ åˆ°å†…å­˜ç¼“å­˜
 			memoryCache.addBitmapToCache(ImgUrl, result);
-			showToast("Í¼Æ¬ÏÂÔØÊ§°Ü...");
+			showToast("å›¾ç‰‡ä¸‹è½½å¤±è´¥...");
 		}
 		if (result == null) {
-			iv_imgDetail.setImageResource(R.drawable.loading_image);// Ìæ»»³É¼ÓÔØµÄÖĞµÄÍ¼Æ¬
+			iv_imgDetail.setImageResource(R.drawable.loading_image);// æ›¿æ¢æˆåŠ è½½çš„ä¸­çš„å›¾ç‰‡
 
 		} else {
 			iv_imgDetail.setImageBitmap(result);
@@ -165,18 +165,18 @@ public class CampusStyleImgDetailActivity extends Activity implements
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
 
-		if(!flag){
+		if (!flag) {
 			if (event.getActionMasked() == MotionEvent.ACTION_POINTER_UP)
-				Log.d("Infor", "¶àµã²Ù×÷");
+				Log.d("Infor", "å¤šç‚¹æ“ä½œ");
 			switch (event.getActionMasked()) {
 			case MotionEvent.ACTION_DOWN:
 				matrix.set(iv_imgDetail.getImageMatrix());
 				savedMatrix.set(matrix);
 				start.set(event.getX(), event.getY());
-				Log.d("Infor", "´¥ÃşÁË...");
+				Log.d("Infor", "è§¦æ‘¸äº†...");
 				mode = DRAG;
 				break;
-			case MotionEvent.ACTION_POINTER_DOWN: // ¶àµã´¥¿Ø
+			case MotionEvent.ACTION_POINTER_DOWN: // å¤šç‚¹è§¦æ§
 				oldDist = this.spacing(event);
 				if (oldDist > 10f) {
 					Log.d("Infor", "oldDist" + oldDist);
@@ -189,11 +189,11 @@ public class CampusStyleImgDetailActivity extends Activity implements
 				mode = NONE;
 				break;
 			case MotionEvent.ACTION_MOVE:
-				if (mode == DRAG) { // ´ËÊµÏÖÍ¼Æ¬µÄÍÏ¶¯¹¦ÄÜ...
+				if (mode == DRAG) { // æ­¤å®ç°å›¾ç‰‡çš„æ‹–åŠ¨åŠŸèƒ½...
 					matrix.set(savedMatrix);
 					matrix.postTranslate(event.getX() - start.x, event.getY()
 							- start.y);
-				} else if (mode == ZOOM) {// ´ËÊµÏÖÍ¼Æ¬µÄËõ·Å¹¦ÄÜ...
+				} else if (mode == ZOOM) {// æ­¤å®ç°å›¾ç‰‡çš„ç¼©æ”¾åŠŸèƒ½...
 					float newDist = spacing(event);
 					if (newDist > 10) {
 						matrix.set(savedMatrix);
@@ -205,45 +205,45 @@ public class CampusStyleImgDetailActivity extends Activity implements
 			}
 			iv_imgDetail.setImageMatrix(matrix);
 		}
-		gd.onTouchEvent(event);// Ê×ÏÈ¼àÌı»¬¶¯ÊÂ¼ş
+		gd.onTouchEvent(event);// é¦–å…ˆç›‘å¬æ»‘åŠ¨äº‹ä»¶
 		return false;
 	}
 
-	public class GDetector extends SimpleOnGestureListener // GDetector Ãû×ÖÊÇËæ±ãÆğµÄ
+	public class GDetector extends SimpleOnGestureListener // GDetector åå­—æ˜¯éšä¾¿èµ·çš„
 	{
-		// MotionEvent e1 °´ÏÂÊ±µÄ×´Ì¬,Î»ÖÃ
-		// MotionEvent e2, //ËÉÊÖÊ±µÄ×´Ì¬£¬Î»ÖÃ
-		// float vx,//x×ø±êµÄÒÆ¶¯ËÙ¶È£¬µ¥Î»: px/Ãë
-		// float y×ø±êµÄÒÆ¶¯ËÙ¶È
+		// MotionEvent e1 æŒ‰ä¸‹æ—¶çš„çŠ¶æ€,ä½ç½®
+		// MotionEvent e2, //æ¾æ‰‹æ—¶çš„çŠ¶æ€ï¼Œä½ç½®
+		// float vx,//xåæ ‡çš„ç§»åŠ¨é€Ÿåº¦ï¼Œå•ä½: px/ç§’
+		// float yåæ ‡çš„ç§»åŠ¨é€Ÿåº¦
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float vx,
 				float vy) {
-			Log.d(LOG_TAG, "»¬¶¯ÊÂ¼ş...");
-			// »¬¶¯ËÙ¶È×ã¹»¿ìÖÁÉÙ50µã/Ãë£¬ÊÖÖ¸ÆğÂäµã¼õÆğµãÊÇÕıÖµÇÒ>200 ÅĞ¶ÏÊôÓÚÏò×ó»¬¶¯
+			Log.d(LOG_TAG, "æ»‘åŠ¨äº‹ä»¶...");
+			// æ»‘åŠ¨é€Ÿåº¦è¶³å¤Ÿå¿«è‡³å°‘50ç‚¹/ç§’ï¼Œæ‰‹æŒ‡èµ·è½ç‚¹å‡èµ·ç‚¹æ˜¯æ­£å€¼ä¸”>200 åˆ¤æ–­å±äºå‘å·¦æ»‘åŠ¨
 			if ((e1.getX() - e2.getX() > 200) && (Math.abs(vx) > 50)) {
 				index++;
-				
-			} else if ((e2.getX() - e1.getX() > 200) && (Math.abs(vx) > 50)) // Í¬ÀíÅĞ¶ÏÊÇÏòÓÒ»¬¶¯
+
+			} else if ((e2.getX() - e1.getX() > 200) && (Math.abs(vx) > 50)) // åŒç†åˆ¤æ–­æ˜¯å‘å³æ»‘åŠ¨
 			{
 				index--;
 			}
-			if(index<0){//µÚÒ»ÕÅ
+			if (index < 0) {// ç¬¬ä¸€å¼ 
 				++index;
-				showToast("ÒÑ¾­µ½´ïµÚÒ»ÕÅ");
-			}else if(index>=contents.size()){//×îºóÒ»ÕÅ
+				showToast("å·²ç»åˆ°è¾¾ç¬¬ä¸€å¼ ");
+			} else if (index >= contents.size()) {// æœ€åä¸€å¼ 
 				--index;
-				showToast("ÒÑ¾­µ½´ï×îºóÒ»ÕÅ");
-			}else{
+				showToast("å·²ç»åˆ°è¾¾æœ€åä¸€å¼ ");
+			} else {
 				flag = true;
 				getImage();
 			}
 			return false;
 		}
-		
+
 	}
 
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */

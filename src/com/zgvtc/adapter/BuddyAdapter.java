@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.zgvtc.R;
 
 /**
- * ÊÊÅäÆ÷
+ * é€‚é…å™¨
  * 
  * @author wen
  * 
@@ -27,7 +27,7 @@ public class BuddyAdapter extends BaseExpandableListAdapter {
 	LayoutInflater inflater;
 
 	public BuddyAdapter(Context context, List<Map<String, Object>> group,
-			List<List<Map<String,Object>>> buddy) {
+			List<List<Map<String, Object>>> buddy) {
 		this.context = context;
 		this.group = group;
 		inflater = LayoutInflater.from(this.context);
@@ -93,7 +93,7 @@ public class BuddyAdapter extends BaseExpandableListAdapter {
 		ImageView image = (ImageView) convertView
 				.findViewById(R.id.buddy_listview_image);
 		image.setImageResource(R.drawable.down_accessory);
-		// ¸ü»»Õ¹¿ª·Ö×éÍ¼Æ¬
+		// æ›´æ¢å±•å¼€åˆ†ç»„å›¾ç‰‡
 		if (!isExpanded) {
 			image.setImageResource(R.drawable.up_accessory);
 		}
@@ -109,13 +109,14 @@ public class BuddyAdapter extends BaseExpandableListAdapter {
 		TextView nameTextView = (TextView) convertView
 				.findViewById(R.id.buddy_listview_child_name);
 		@SuppressWarnings("unchecked")
-		Map<String, Object> childcontent = (Map<String, Object>) getChild(groupPosition, childPosition);
+		Map<String, Object> childcontent = (Map<String, Object>) getChild(
+				groupPosition, childPosition);
 		nameTextView.setText(childcontent.get("title").toString());
 		return convertView;
 	}
 
 	/**
-	 * ×ÓÏîÊÇ·ñ¿ÉÒÔÑ¡Ôñ
+	 * å­é¡¹æ˜¯å¦å¯ä»¥é€‰æ‹©
 	 */
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {

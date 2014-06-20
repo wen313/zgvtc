@@ -1,5 +1,6 @@
 package com.zgvtc;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,15 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.R.anim;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +25,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
@@ -41,7 +39,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.zgvtc.bean.NewsTitleBean;
 import com.zgvtc.nets.HttpUtil;
+import com.zgvtc.nets.NetworkUtils;
+import com.zgvtc.util.AppApplication;
+import com.zgvtc.util.ConfigCache;
 import com.zgvtc.util.Constant;
+import com.zgvtc.util.FileUtils;
 import com.zgvtc.view.SegmentedGroup;
 import com.zgvtc.view.XListView;
 import com.zgvtc.view.XListView.IXListViewListener;
@@ -54,21 +56,21 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 	private XListView newsList;
 	private ListAdapter contentAdapter;
 	private SimpleAdapter sa;
-	private List<NewsTitleBean> contents = new ArrayList<NewsTitleBean>();// ĞÂÎÅ±êÌâ
-	private int index = 1;// Ò³Êı
-	private String BaseUrl = "news/campus_news/";// urlµØÖ·
+	private List<NewsTitleBean> contents = new ArrayList<NewsTitleBean>();// æ–°é—»æ ‡é¢˜
+	private int index = 1;// ç´¢å¼•
+	private String BaseUrl = "news/campus_news/";// urlåœ°å€
 	private SegmentedGroup segmented;
 	private RelativeLayout relativelayout_top;
-	
-	// ²éÑ¯
+
+	// æŸ¥è¯¢
 	private AlertDialog dialog;
 	private View dialogView;
-	// ËÑË÷
+	// æœç´¢
 	private RelativeLayout rl_condition_choices;
-	// ²éÑ¯¿ò
-	private AutoCompleteTextView act_keyword;// ¹Ø¼ü×Ö
+	// æŸ¥è¯¢æ¡†
+	private AutoCompleteTextView act_keyword;// æœç´¢
 	private Button btn_clear;
-	
+
 	private int width;
 	private int height;
 	WindowManager wm;
@@ -82,8 +84,8 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 		wm = getActivity().getWindowManager();
 		width = wm.getDefaultDisplay().getWidth();
 		height = wm.getDefaultDisplay().getHeight();
-		getData(BaseUrl, index);
 		setUpView(view);
+		setNewsList();
 		return view;
 	}
 
@@ -115,7 +117,7 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 			}
 		});
 
-		// ÇĞ»»ÊÂ¼ş
+		// åˆ‡æ¢äº‹ä»¶
 		segmented.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -123,13 +125,13 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 				// TODO Auto-generated method stub
 				int radioButtonId = group.getCheckedRadioButtonId();
 				switch (radioButtonId) {
-				case R.id.rb_message:// Í¨Öª
-					Log.d(TAG, "Í¨Öª");
+				case R.id.rb_message:// Í¨é€šçŸ¥
+					Log.d(TAG, "Í¨é€šçŸ¥");
 					BaseUrl = "news/notifications/";
 					onRefresh();
 					break;
-				case R.id.rb_newscenter:// ÏûÏ¢ÖĞĞÄ
-					Log.d(TAG, "ÏûÏ¢ÖĞĞÄ");
+				case R.id.rb_newscenter:// æ¶ˆæ¯ä¸­å¿ƒ
+					Log.d(TAG, "æ¶ˆæ¯ä¸­å¿ƒ");
 					BaseUrl = "news/campus_news/";
 					onRefresh();
 					break;
@@ -139,26 +141,27 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 			}
 		});
 
-		// ÊäÈëËÑË÷¿ò
+		// è¾“å…¥æœç´¢æ¡†
 		dialog = new AlertDialog.Builder(getActivity()).create();
 		// dialog.setCanceledOnTouchOutside(false);
-		dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {// ´°¿ÚÏûÊ§ÊÂ¼ş
+		dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {// çª—å£æ¶ˆå¤±äº‹ä»¶
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				// TODO Auto-generated method stub
-				relativelayout_top.setVisibility(View.VISIBLE);// ÖØĞÂÏÔÊ¾
+				relativelayout_top.setVisibility(View.VISIBLE);// é‡æ–°æ˜¾ç¤º
 			}
 		});
 		dialogView = LayoutInflater.from(getActivity()).inflate(
 				R.layout.dialog_search, null);
 
-		// ¹Ø¼ü×Ö
-		act_keyword = (AutoCompleteTextView) dialogView.findViewById(R.id.act_keyword);
+		// å…³é”®å­—
+		act_keyword = (AutoCompleteTextView) dialogView
+				.findViewById(R.id.act_keyword);
 		btn_clear = (Button) dialogView.findViewById(R.id.btn_clear);
 
 		dialog.getWindow().setGravity(Gravity.TOP | Gravity.LEFT);
-//		dialog.getWindow().setLayout(WindowManager.LayoutParams.FILL_PARENT,
-//				WindowManager.LayoutParams.FILL_PARENT);
+		// dialog.getWindow().setLayout(WindowManager.LayoutParams.FILL_PARENT,
+		// WindowManager.LayoutParams.FILL_PARENT);
 		dialog.setView(dialogView, 0, 0, 0, 0);
 		btn_clear.setOnClickListener(this);
 
@@ -176,37 +179,65 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 		return data;
 	}
 
-	void getData(String url, int page) {
-		HttpUtil.get(url + page, null, new AsyncHttpResponseHandler() {
+	private void setNewsList() {
+		final String url = BaseUrl + index;
+		String cacheConfigString = ConfigCache.getUrlCache(url);
+		if (cacheConfigString != null) {
+			showNewsList(cacheConfigString);
+		} else {
+			HttpUtil.get(url, null, new AsyncHttpResponseHandler() {
+				@Override
+				public void onStart() {
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					ConfigCache.setUrlCache(result, url);
+					showNewsList(result);
+				}
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					showToast(Constant.WARNING);
+				}
+
+			});
+		}
+	}
+
+	private void setMoreNewsList() {
+		final String url = BaseUrl + index;
+		HttpUtil.get(url, null, new AsyncHttpResponseHandler() {
 			@Override
-			public void onFailure(int statusCode, Throwable error,
-					String content) {
-				// TODO Auto-generated method stub
-				super.onFailure(statusCode, error, content);
-				showToast(Constant.WARNING);
-				onLoad();
-				Log.d(TAG, "´íÎóÂë£º" + statusCode + ",´íÎó£º" + error.getMessage()
-						+ ",ÄÚÈİ£º" + content);
+			public void onStart() {
 			}
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
-				super.onSuccess(statusCode, content);
-				List<NewsTitleBean> newstitlelist = JSONArray.parseArray(
-						content, NewsTitleBean.class);
-				if (newstitlelist == null || newstitlelist.size() == 0) {
-					newsList.setPullLoadEnable(false);
-					showToast("ÒÑ¾­µ½´ï×îºóÒ»Ò³");
-				} else {
-					contents.addAll(newstitlelist);
-					contentAdapter.notifyDataSetChanged();
-				}
-				onLoad();
+			public void onSuccess(String result) {
+				showNewsList(result);
+			}
 
+			@Override
+			public void onFailure(Throwable arg0) {
+				showToast(Constant.WARNING);
+				onLoad();
 			}
 
 		});
+	}
+
+	// è§£æjson
+	private void showNewsList(String result) {
+		List<NewsTitleBean> newstitlelist = JSONArray.parseArray(result,
+				NewsTitleBean.class);
+		if (newstitlelist == null || newstitlelist.size() == 0) {
+			newsList.setPullLoadEnable(false);
+			showToast("å·²ç»åˆ°è¾¾æœ€åä¸€é¡µ");
+		} else {
+			contents.addAll(newstitlelist);
+			contentAdapter.notifyDataSetChanged();
+		}
+		onLoad();
 	}
 
 	@Override
@@ -214,11 +245,11 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rl_condition_choices:
-			relativelayout_top.setVisibility(View.GONE);// Òş²Ø×îÉÏÃæµÄ
-			initAutoComplete();// ³õÊ¼»¯×Ô¶¯Ìî³ä¿ò
+			relativelayout_top.setVisibility(View.GONE);// éšè—æœ€ä¸Šé¢çš„
+			initAutoComplete();// åˆå§‹åŒ–è‡ªåŠ¨å¡«å……æ¡†
 			dialog.show();
 			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-			lp.width = width; //ÉèÖÃ¿í¶È
+			lp.width = width; // è®¾ç½®å®½åº¦
 			dialog.getWindow().setAttributes(lp);
 			break;
 		case R.id.btn_clear:
@@ -230,12 +261,13 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 
 	private void initAutoComplete() {
 		sa = new SimpleAdapter(getActivity(), getData(),
-				R.layout.news_info_list_item, new String[] { "date", "title","id" },
-				new int[] { R.id.tv_news_date, R.id.tv_news_title,R.id.tv_news_id });
+				R.layout.news_info_list_item, new String[] { "date", "title",
+						"id" }, new int[] { R.id.tv_news_date,
+						R.id.tv_news_title, R.id.tv_news_id });
 		act_keyword.setAdapter(sa);
-		act_keyword.setDropDownHeight(height/3);
-		act_keyword.setDropDownWidth(width-10);
-		act_keyword.setThreshold(1);// ÉèÖÃÊäÈë1¸ö×Ö·û´®ºó¾Í³öÏÖÌáÊ¾
+		act_keyword.setDropDownHeight(height / 3);
+		act_keyword.setDropDownWidth(width - 10);
+		act_keyword.setThreshold(1);// è®¾ç½®è¾“å…¥1ä¸ªå­—ç¬¦ä¸²åå°±å‡ºç°æç¤º
 		act_keyword.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -251,11 +283,14 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				TextView tv_title = (TextView) view.findViewById(R.id.tv_news_title);
+				TextView tv_title = (TextView) view
+						.findViewById(R.id.tv_news_title);
 				String title = tv_title.getText().toString();
-				String date = ((TextView)view.findViewById(R.id.tv_news_date)).getText().toString();
-				String newsid = ((TextView)view.findViewById(R.id.tv_news_id)).getText().toString();
-				
+				String date = ((TextView) view.findViewById(R.id.tv_news_date))
+						.getText().toString();
+				String newsid = ((TextView) view.findViewById(R.id.tv_news_id))
+						.getText().toString();
+
 				Intent it = new Intent(getActivity(), NewsDetailActivity.class);
 				it.putExtra("newsurl", "news/news_detail/" + newsid);
 				it.putExtra("date", date);
@@ -272,28 +307,57 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 	public void onRefresh() {
 		// TODO Auto-generated method stub
 		index = 1;
-		contents.clear();
-		newsList.setPullLoadEnable(true);// Ë¢ĞÂºóÔÊĞí¼ÓÔØ¸ü¶à
-		getData(BaseUrl, index);
+		newsList.setPullLoadEnable(true);// åˆ·æ–°åå…è®¸åŠ è½½æ›´å¤š
+		final String url = BaseUrl + index;
+		try {
+			HttpUtil.get(url, null, new AsyncHttpResponseHandler() {
+				@Override
+				public void onStart() {
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					ConfigCache.setUrlCache(result, url);
+					contents.clear();
+					showNewsList(result);
+				}
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					showToast(Constant.WARNING);
+					onLoad();
+				}
+
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void onLoadMore() {
 		// TODO Auto-generated method stub
-		getData(BaseUrl, ++index);
+		// getData(BaseUrl, ++index);
+		if (AppApplication.mNetWorkState == NetworkUtils.NETWORN_NONE) {
+			showToast(Constant.NONETWARNING);
+			onLoad();
+		} else {
+			++index;
+			setMoreNewsList();
+		}
 	}
 
 	private void onLoad() {
 		newsList.stopRefresh();
 		newsList.stopLoadMore();
-		SimpleDateFormat format = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥  HH:mm");
 		String date = format.format(new Date());
 		newsList.setRefreshTime(date);
 	}
 
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */
@@ -358,10 +422,12 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			if(position%2==0){
-				convertView.setBackgroundColor(getResources().getColor(R.color.info_panel_bg));
-			}else{
-				convertView.setBackgroundColor(getResources().getColor(android.R.color.white));
+			if (position % 2 == 0) {
+				convertView.setBackgroundColor(getResources().getColor(
+						R.color.info_panel_bg));
+			} else {
+				convertView.setBackgroundColor(getResources().getColor(
+						android.R.color.white));
 			}
 			NewsTitleBean ntb = contents.get(position);
 			holder.tv_news_date.setText(ntb.getNewspath());

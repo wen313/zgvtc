@@ -10,16 +10,16 @@ import android.support.v4.util.LruCache;
 
 public class ImageMemoryCache {
 	/**
-	 * ´ÓÄÚ´æ¶ÁÈ¡Êı¾İËÙ¶ÈÊÇ×î¿ìµÄ£¬ÎªÁË¸ü´óÏŞ¶ÈÊ¹ÓÃÄÚ´æ£¬ÕâÀïÊ¹ÓÃÁËÁ½²ã»º´æ¡£ Ó²ÒıÓÃ»º´æ²»»áÇáÒ×±»»ØÊÕ£¬ÓÃÀ´±£´æ³£ÓÃÊı¾İ£¬²»³£ÓÃµÄ×ªÈëÈíÒıÓÃ»º´æ¡£
+	 * ä»å†…å­˜è¯»å–æ•°æ®é€Ÿåº¦æ˜¯æœ€å¿«çš„ï¼Œä¸ºäº†æ›´å¤§é™åº¦ä½¿ç”¨å†…å­˜ï¼Œè¿™é‡Œä½¿ç”¨äº†ä¸¤å±‚ç¼“å­˜ã€‚ ç¡¬å¼•ç”¨ç¼“å­˜ä¸ä¼šè½»æ˜“è¢«å›æ”¶ï¼Œç”¨æ¥ä¿å­˜å¸¸ç”¨æ•°æ®ï¼Œä¸å¸¸ç”¨çš„è½¬å…¥è½¯å¼•ç”¨ç¼“å­˜ã€‚
 	 */
-	private static final int SOFT_CACHE_SIZE = 15; // ÈíÒıÓÃ»º´æÈİÁ¿
-	private static LruCache<String, Bitmap> mLruCache; // Ó²ÒıÓÃ»º´æ
-	private static LinkedHashMap<String, SoftReference<Bitmap>> mSoftCache; // ÈíÒıÓÃ»º´æ
+	private static final int SOFT_CACHE_SIZE = 15; // è½¯å¼•ç”¨ç¼“å­˜å®¹é‡
+	private static LruCache<String, Bitmap> mLruCache; // ç¡¬å¼•ç”¨ç¼“å­˜
+	private static LinkedHashMap<String, SoftReference<Bitmap>> mSoftCache; // è½¯å¼•ç”¨ç¼“å­˜
 
 	public ImageMemoryCache(Context context) {
 		int memClass = ((ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
-		int cacheSize = 1024 * 1024 * memClass / 4; // Ó²ÒıÓÃ»º´æÈİÁ¿£¬ÎªÏµÍ³¿ÉÓÃÄÚ´æµÄ1/4
+		int cacheSize = 1024 * 1024 * memClass / 4; // ç¡¬å¼•ç”¨ç¼“å­˜å®¹é‡ï¼Œä¸ºç³»ç»Ÿå¯ç”¨å†…å­˜çš„1/4
 		mLruCache = new LruCache<String, Bitmap>(cacheSize) {
 			@Override
 			protected int sizeOf(String key, Bitmap value) {
@@ -33,7 +33,7 @@ public class ImageMemoryCache {
 			protected void entryRemoved(boolean evicted, String key,
 					Bitmap oldValue, Bitmap newValue) {
 				if (oldValue != null)
-					// Ó²ÒıÓÃ»º´æÈİÁ¿ÂúµÄÊ±ºò£¬»á¸ù¾İLRUËã·¨°Ñ×î½üÃ»ÓĞ±»Ê¹ÓÃµÄÍ¼Æ¬×ªÈë´ËÈíÒıÓÃ»º´æ
+					// ç¡¬å¼•ç”¨ç¼“å­˜å®¹é‡æ»¡çš„æ—¶å€™ï¼Œä¼šæ ¹æ®LRUç®—æ³•æŠŠæœ€è¿‘æ²¡æœ‰è¢«ä½¿ç”¨çš„å›¾ç‰‡è½¬å…¥æ­¤è½¯å¼•ç”¨ç¼“å­˜
 					mSoftCache.put(key, new SoftReference<Bitmap>(oldValue));
 			}
 		};
@@ -53,27 +53,27 @@ public class ImageMemoryCache {
 	}
 
 	/**
-	 * ´Ó»º´æÖĞ»ñÈ¡Í¼Æ¬
+	 * ä»ç¼“å­˜ä¸­è·å–å›¾ç‰‡
 	 */
 	public Bitmap getBitmapFromCache(String url) {
 		Bitmap bitmap;
-		// ÏÈ´ÓÓ²ÒıÓÃ»º´æÖĞ»ñÈ¡
+		// å…ˆä»ç¡¬å¼•ç”¨ç¼“å­˜ä¸­è·å–
 		synchronized (mLruCache) {
 			bitmap = mLruCache.get(url);
 			if (bitmap != null) {
-				// Èç¹ûÕÒµ½µÄ»°£¬°ÑÔªËØÒÆµ½LinkedHashMapµÄ×îÇ°Ãæ£¬´Ó¶ø±£Ö¤ÔÚLRUËã·¨ÖĞÊÇ×îºó±»É¾³ı
+				// å¦‚æœæ‰¾åˆ°çš„è¯ï¼ŒæŠŠå…ƒç´ ç§»åˆ°LinkedHashMapçš„æœ€å‰é¢ï¼Œä»è€Œä¿è¯åœ¨LRUç®—æ³•ä¸­æ˜¯æœ€åè¢«åˆ é™¤
 				mLruCache.remove(url);
 				mLruCache.put(url, bitmap);
 				return bitmap;
 			}
 		}
-		// Èç¹ûÓ²ÒıÓÃ»º´æÖĞÕÒ²»µ½£¬µ½ÈíÒıÓÃ»º´æÖĞÕÒ
+		// å¦‚æœç¡¬å¼•ç”¨ç¼“å­˜ä¸­æ‰¾ä¸åˆ°ï¼Œåˆ°è½¯å¼•ç”¨ç¼“å­˜ä¸­æ‰¾
 		synchronized (mSoftCache) {
 			SoftReference<Bitmap> bitmapReference = mSoftCache.get(url);
 			if (bitmapReference != null) {
 				bitmap = bitmapReference.get();
 				if (bitmap != null) {
-					// ½«Í¼Æ¬ÒÆ»ØÓ²»º´æ
+					// å°†å›¾ç‰‡ç§»å›ç¡¬ç¼“å­˜
 					mLruCache.put(url, bitmap);
 					mSoftCache.remove(url);
 					return bitmap;
@@ -86,7 +86,7 @@ public class ImageMemoryCache {
 	}
 
 	/**
-	 * Ìí¼ÓÍ¼Æ¬µ½»º´æ
+	 * æ·»åŠ å›¾ç‰‡åˆ°ç¼“å­˜
 	 */
 	public void addBitmapToCache(String url, Bitmap bitmap) {
 		if (bitmap != null) {

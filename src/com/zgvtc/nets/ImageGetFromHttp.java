@@ -15,7 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-//´ÓÍøÂç¼ÓÔØÍ¼Æ¬
+//ä»Žç½‘ç»œåŠ è½½å›¾ç‰‡
 public class ImageGetFromHttp {
 	private static final String LOG_TAG = "ImageGetFromHttp";
 
@@ -56,7 +56,7 @@ public class ImageGetFromHttp {
 		} catch (Exception e) {
 			//e.printStackTrace();
 			getRequest.abort();
-			Log.d(LOG_TAG, "´íÎó:"+e.getMessage());
+			Log.d(LOG_TAG, "é”™è¯¯:"+e.getMessage());
 			Log.w(LOG_TAG, "Error while retrieving bitmap from " + url, e);
 		} finally {
 			client.getConnectionManager().shutdown();

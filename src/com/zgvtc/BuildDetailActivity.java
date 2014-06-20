@@ -27,7 +27,7 @@ public class BuildDetailActivity extends Activity {
 
 	private ListView list;
 	private ImageView iv_return;
-	List<Map<String, Object>> data;// Êı¾İ
+	List<Map<String, Object>> data;// æ•°æ®
 	private String title;
 	private String classid;
 	private TextView tv_condition;
@@ -90,28 +90,28 @@ public class BuildDetailActivity extends Activity {
 	private List<Map<String, Object>> getData() {
 		data = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
-		map.put("title", "×¨Òµ½éÉÜ");
+		map.put("title", "ä¸“ä¸šä»‹ç»");
 		data.add(map);
 
 		map = new HashMap<>();
-		map.put("title", "ÊµÊ©·½°¸");
+		map.put("title", "å®æ–½æ–¹æ¡ˆ");
 		data.add(map);
 
 		map = new HashMap<>();
-		map.put("title", "ÈË²ÅÅàÑøÓë¿Î³ÌÌåÏµ¸Ä¸ï");
+		map.put("title", "äººæ‰åŸ¹å…»ä¸è¯¾ç¨‹ä½“ç³»æ”¹é©");
 		data.add(map);
 
 		map = new HashMap<>();
-		map.put("title", "Ê¦×Ê¶ÓÎé½¨Éè");
+		map.put("title", "å¸ˆèµ„é˜Ÿä¼å»ºè®¾");
 		data.add(map);
 
 		map = new HashMap<>();
-		map.put("title", "Ğ£ÆóºÏ×÷¹¤Ñ§½áºÏÔËĞĞ»úÖÆ½¨Éè");
+		map.put("title", "æ ¡ä¼åˆä½œå·¥å­¦ç»“åˆè¿è¡Œæœºåˆ¶å»ºè®¾");
 		map.put("id", 45);
 		data.add(map);
 
 		map = new HashMap<>();
-		map.put("title", "³É¹ûÕ¹Ê¾");
+		map.put("title", "æˆæœå±•ç¤º");
 		data.add(map);
 
 		switch (classid) {

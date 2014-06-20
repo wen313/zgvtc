@@ -14,7 +14,7 @@ public class HttpUtil {
 
 	public static void get(String url, RequestParams params,
 			AsyncHttpResponseHandler responseHandler) {
-		System.out.println("urlµØÖ·£º" + getAbsoluteUrl(url));
+		System.out.println("urlåœ°å€ï¼š" + getAbsoluteUrl(url));
 		client.get(getAbsoluteUrl(url), params, responseHandler);
 	}
 
@@ -27,25 +27,25 @@ public class HttpUtil {
 		return Constant.WEBVIE_WBASEURL + relativeUrl;
 	}
 
-	// //=============================»ñÈ¡Í¼Æ¬========================================
-	/*** »ñµÃÒ»ÕÅÍ¼Æ¬,´ÓÈı¸öµØ·½»ñÈ¡,Ê×ÏÈÊÇÄÚ´æ»º´æ,È»ºóÊÇÎÄ¼ş»º´æ,×îºó´ÓÍøÂç»ñÈ¡ ***/
-	public static Bitmap getBitmap(String url,Context context) {
-		// ´ÓÄÚ´æ»º´æÖĞ»ñÈ¡Í¼Æ¬
+	// //=============================è·å–å›¾ç‰‡========================================
+	/*** è·å¾—ä¸€å¼ å›¾ç‰‡,ä»ä¸‰ä¸ªåœ°æ–¹è·å–,é¦–å…ˆæ˜¯å†…å­˜ç¼“å­˜,ç„¶åæ˜¯æ–‡ä»¶ç¼“å­˜,æœ€åä»ç½‘ç»œè·å– ***/
+	public static Bitmap getBitmap(String url, Context context) {
+		// ä»å†…å­˜ç¼“å­˜ä¸­è·å–å›¾ç‰‡
 		ImageMemoryCache memoryCache = new ImageMemoryCache(context);
 		Bitmap result = memoryCache.getBitmapFromCache(url);
 		if (result == null) {
-			// ÎÄ¼ş»º´æÖĞ»ñÈ¡
+			// æ–‡ä»¶ç¼“å­˜ä¸­è·å–
 			ImageFileCache fileCache = new ImageFileCache();
 			result = fileCache.getImage(url);
 			if (result == null) {
-				// ´ÓÍøÂç»ñÈ¡
+				// ä»ç½‘ç»œè·å–
 				result = ImageGetFromHttp.downloadBitmap(url);
 				if (result != null) {
 					fileCache.saveBitmap(result, url);
 					memoryCache.addBitmapToCache(url, result);
 				}
 			} else {
-				// Ìí¼Óµ½ÄÚ´æ»º´æ
+				// æ·»åŠ åˆ°å†…å­˜ç¼“å­˜
 				memoryCache.addBitmapToCache(url, result);
 			}
 		}

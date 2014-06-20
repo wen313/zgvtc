@@ -32,18 +32,18 @@ import com.zgvtc.view.XListView.IXListViewListener;
 
 public class NewsTitleActivity extends Activity implements IXListViewListener,
 		OnClickListener {
-	
+
 	private String TAG = "NewsTitleActivity";
 	private Toast mToast;
 	private XListView newsList;
 	private TextView tv_title;
-	private ImageView iv_return;//·µ»Ø°´Å¥
+	private ImageView iv_return;// è¿”å›æŒ‰é’®
 	private ListAdapter contentAdapter;
-	private List<NewsTitleBean> contents = new ArrayList<NewsTitleBean>();// ĞÂÎÅ±êÌâ
-	private int index = 1;// Ò³Êı
-	private String BaseUrl;// urlµØÖ·
+	private List<NewsTitleBean> contents = new ArrayList<NewsTitleBean>();// æ–°é—»æ ‡é¢˜
+	private int index = 1;// é¡µæ•°
+	private String BaseUrl;// urlåœ°å€
 	private String title;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -71,16 +71,17 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				NewsTitleBean ntb = contents.get(position-1);
-				Intent it = new Intent(NewsTitleActivity.this, NewsDetailActivity.class);
-				it.putExtra("newsurl", "news/news_detail/"+ntb.getId());
+				NewsTitleBean ntb = contents.get(position - 1);
+				Intent it = new Intent(NewsTitleActivity.this,
+						NewsDetailActivity.class);
+				it.putExtra("newsurl", "news/news_detail/" + ntb.getId());
 				it.putExtra("date", ntb.getNewspath());
 				it.putExtra("title", ntb.getTitle());
 				NewsTitleActivity.this.startActivity(it);
 			}
 		});
-		
-		//·µ»ØÍË³ö
+
+		// è¿”å›é€€å‡º
 		iv_return.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -88,13 +89,13 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 				NewsTitleActivity.this.finish();
 			}
 		});
-		
+
 		tv_title.setText(title);
 
 	}
 
 	void getData(String url, int page) {
-		HttpUtil.get(url+page, null, new AsyncHttpResponseHandler() {
+		HttpUtil.get(url + page, null, new AsyncHttpResponseHandler() {
 			@Override
 			public void onFailure(int statusCode, Throwable error,
 					String content) {
@@ -102,26 +103,26 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 				super.onFailure(statusCode, error, content);
 				showToast(Constant.WARNING);
 				onLoad();
-				Log.d(TAG, "´íÎóÂë£º"+statusCode+",´íÎó£º" + error.getMessage()+",ÄÚÈİ£º"+content);
+				Log.d(TAG, "é”™è¯¯ç ï¼š" + statusCode + ",é”™è¯¯ï¼š" + error.getMessage()
+						+ ",å†…å®¹ï¼š" + content);
 			}
+
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
-				List<NewsTitleBean> newstitlelist = JSONArray.parseArray(content, NewsTitleBean.class);
-				if(newstitlelist==null||newstitlelist.size()==0){
+				List<NewsTitleBean> newstitlelist = JSONArray.parseArray(
+						content, NewsTitleBean.class);
+				if (newstitlelist == null || newstitlelist.size() == 0) {
 					newsList.setPullLoadEnable(false);
-					showToast("ÒÑ¾­µ½´ï×îºóÒ»Ò³");
-				}else{
+					showToast("å·²ç»åˆ°è¾¾æœ€åä¸€é¡µ");
+				} else {
 					contents.addAll(newstitlelist);
 					contentAdapter.notifyDataSetChanged();
 				}
 				onLoad();
-				
-				
+
 			}
-			
-			
 
 		});
 	}
@@ -135,11 +136,11 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
-		index=1;
+		index = 1;
 		contents.clear();
-		newsList.setPullLoadEnable(true);// Ë¢ĞÂºóÔÊĞí¼ÓÔØ¸ü¶à
+		newsList.setPullLoadEnable(true);// åˆ·æ–°åå…è®¸åŠ è½½æ›´å¤š
 		getData(BaseUrl, index);
-		
+
 	}
 
 	@Override
@@ -147,17 +148,17 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 		// TODO Auto-generated method stub
 		getData(BaseUrl, ++index);
 	}
-	
+
 	private void onLoad() {
 		newsList.stopRefresh();
 		newsList.stopLoadMore();
-		SimpleDateFormat format = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥  HH:mm");
 		String date = format.format(new Date());
 		newsList.setRefreshTime(date);
 	}
-	
+
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */
@@ -222,10 +223,12 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			if(position%2==0){
-				convertView.setBackgroundColor(getResources().getColor(R.color.info_panel_bg));
-			}else{
-				convertView.setBackgroundColor(getResources().getColor(android.R.color.white));
+			if (position % 2 == 0) {
+				convertView.setBackgroundColor(getResources().getColor(
+						R.color.info_panel_bg));
+			} else {
+				convertView.setBackgroundColor(getResources().getColor(
+						android.R.color.white));
 			}
 			NewsTitleBean ntb = contents.get(position);
 			holder.tv_news_date.setText(ntb.getNewspath());

@@ -19,7 +19,7 @@ import android.widget.SimpleAdapter;
 public class AdmissionEmpFragment extends Fragment {
 
 	private ListView admissionEmplist;
-	List<Map<String, Object>> data;//Êı¾İ
+	List<Map<String, Object>> data;// æ•°æ®
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,24 +33,27 @@ public class AdmissionEmpFragment extends Fragment {
 
 	private void setUpView(View view) {
 		admissionEmplist = (ListView) view.findViewById(R.id.lv_admissionEmp);
-//		SimpleAdapter<String> adapter = new SimpleAdapter(getActivity(),
-//				R.layout.emp_info_list_item,R.id.tv_emp_title, getData());
-		SimpleAdapter adapter = new SimpleAdapter(getActivity(),getData(), 
-				R.layout.news_title_list_item, new String[] { "title" }, 
-				new int[] { R.id.buddy_listview_child_name});
+		// SimpleAdapter<String> adapter = new SimpleAdapter(getActivity(),
+		// R.layout.emp_info_list_item,R.id.tv_emp_title, getData());
+		SimpleAdapter adapter = new SimpleAdapter(getActivity(), getData(),
+				R.layout.news_title_list_item, new String[] { "title" },
+				new int[] { R.id.buddy_listview_child_name });
 		admissionEmplist.setAdapter(adapter);
-		
+
 		admissionEmplist.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Map<String,Object> content = data.get(position);
+				Map<String, Object> content = data.get(position);
 				content.get("id");
 				Intent it = new Intent();
 				it = new Intent(getActivity(), NewsTitleActivity.class);
-				it.putExtra("newsTitleUrl", "/admissionemployment/admission_item_list/"+content.get("id")+"/");
+				it.putExtra(
+						"newsTitleUrl",
+						"/admissionemployment/admission_item_list/"
+								+ content.get("id") + "/");
 				it.putExtra("title", content.get("title").toString());
 				getActivity().startActivity(it);
 			}
@@ -60,33 +63,33 @@ public class AdmissionEmpFragment extends Fragment {
 
 	private List<Map<String, Object>> getData() {
 		data = new ArrayList<Map<String, Object>>();
-		Map<String,Object> map = new HashMap<>();
-		map.put("title", "ÕĞÉú¼ò½é");
+		Map<String, Object> map = new HashMap<>();
+		map.put("title", "æ‹›ç”Ÿç®€ä»‹");
 		map.put("id", 40);
 		data.add(map);
-		
+
 		map = new HashMap<>();
-		map.put("title", "×¨Òµ½éÉÜ");
+		map.put("title", "ä¸“ä¸šä»‹ç»");
 		map.put("id", 41);
 		data.add(map);
-		
+
 		map = new HashMap<>();
-		map.put("title", "²¿·Ö¾ÍÒµµ¥Î»");
+		map.put("title", "éƒ¨åˆ†å°±ä¸šå•ä½");
 		map.put("id", 42);
 		data.add(map);
-		
+
 		map = new HashMap<>();
-		map.put("title", "ÓÅĞã±ÏÒµÉú");
+		map.put("title", "ä¼˜ç§€æ¯•ä¸šç”Ÿ");
 		map.put("id", 43);
 		data.add(map);
-		
+
 		map = new HashMap<>();
-		map.put("title", "¾ÍÒµĞÅÏ¢");
-		map.put("id",46);
+		map.put("title", "å°±ä¸šä¿¡æ¯");
+		map.put("id", 46);
 		data.add(map);
-		
+
 		map = new HashMap<>();
-		map.put("title", "¾ÍÒµÕş²ß");
+		map.put("title", "å°±ä¸šæ”¿ç­–");
 		map.put("id", 47);
 		data.add(map);
 

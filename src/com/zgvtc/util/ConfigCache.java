@@ -51,8 +51,11 @@ public class ConfigCache {
 	public static void setUrlCache(String data, String url) {
 		File file = new File(AppApplication.mSdcardDataDir + "/"
 				+ getCacheDecodeString(url));
+		if (file.exists() && file.isFile()) {
+            file.delete();
+        }
 		try {
-			// 创建缓存数据到磁盘，就是创建文件
+			//鍒涘缓缂撳瓨鏁版嵁鍒扮鐩橈紝灏辨槸鍒涘缓鏂囦欢
 			FileUtils.writeTextFile(file, data);
 		} catch (IOException e) {
 			Log.d(TAG, "write " + file.getAbsolutePath() + " data failed!");
@@ -61,8 +64,8 @@ public class ConfigCache {
 	}
 
 	public static String getCacheDecodeString(String url) {
-		// 1. 处理特殊字符
-		// 2. 去除后缀名带来的文件浏览器的视图凌乱(特别是图片更需要如此类似处理，否则有的手机打开图库，全是我们的缓存图片)
+		// 1. 澶勭悊鐗规畩瀛楃
+		// 2. 鍘婚櫎鍚庣紑鍚嶅甫鏉ョ殑鏂囦欢娴忚鍣ㄧ殑瑙嗗浘鍑屼贡(鐗瑰埆鏄浘鐗囨洿闇�瑕佸姝ょ被浼煎鐞嗭紝鍚﹀垯鏈夌殑鎵嬫満鎵撳紑鍥惧簱锛屽叏鏄垜浠殑缂撳瓨鍥剧墖)
 		if (url != null) {
 			return url.replaceAll("[.:/,%?&=]", "+").replaceAll("[+]+", "+");
 		}

@@ -2,11 +2,13 @@ package com.zgvtc.util;
 
 
 public class Constant {
-	//public static final String WEBVIE_WBASEURL = "http://59.69.105.50:8888/mobile/index.php/";// 设备信息url地址
-	//public static final String WEBVIE_WBASEURL = "http://192.168.1.105:8888/mobile/index.php/";// 设备信息url地址
+	//public static final String WEBVIE_WBASEURL = "http://59.69.105.50:8888/mobile/index.php/";// 锟借备锟斤拷息url锟斤拷址
+	//public static final String WEBVIE_WBASEURL = "http://192.168.1.105:8888/mobile/index.php/";// 锟借备锟斤拷息url锟斤拷址
 	public static final String WEBVIE_WBASEURL = "http://www.zgvtc.cn/mobile/index.php/";//
-	public static final String VIEWHTML="view.html";//新闻页面
-	public static final String VIEWCLASSHTML="viewclass.html";//学校概况
-	public static final String APPNAME="Zgvtc";//学校概况
-	public static final String WARNING = "连接超时，请重试";
+	public static final String VIEWHTML="view.html";//鏂伴椈椤甸潰妯℃澘
+	public static final String VIEWCLASSHTML="viewclass.html";//瀛︽牎姒傚喌妯℃澘
+	public static final String APPNAME="Zgvtc";//杞欢鍚嶅瓧
+	public static final String APPCONFIG=APPNAME+"/config";//杞欢鍚嶅瓧
+	public static final String WARNING = "杩炴帴瓒呮椂锛岃閲嶈瘯";
+	public static final String NONETWARNING = "杩樻病鑱旂綉锛岃璁剧疆缃戠粶";
 }

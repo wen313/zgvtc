@@ -1,6 +1,5 @@
 package com.zgvtc;
 
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -9,26 +8,26 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 
-public class MainActivity extends FragmentActivity implements OnClickListener{
+public class MainActivity extends FragmentActivity implements OnClickListener {
 
-	private MyNewsFragment myNewsPage;//–¬Œ≈÷––ƒ
-	private WalkCampusFragment walkCampusPage;//◊ﬂΩ¯–£‘∞
-	private DemoSchoolFragment demoSchoolPage;// æ∑∂–£
-	private ShorttermTrainFragment shorttermTrainPage;//≥…ΩÃ≈‡—µ
-	private AdmissionEmpFragment admissionEmpPage;//’–…˙æÕ“µ
-	
-	private FrameLayout mynews,walkCampus,demoSchool,shorttermTrain,admissionEmp;
-	
-	
+	private MyNewsFragment myNewsPage;// Êñ∞Èóª‰∏≠ÂøÉ
+	private WalkCampusFragment walkCampusPage;// Ëµ∞ËøõÊ†°Âõ≠
+	private DemoSchoolFragment demoSchoolPage;// Á§∫ËåÉÊ†°
+	private ShorttermTrainFragment shorttermTrainPage;// ÊàêÊïôÂüπËÆ≠
+	private AdmissionEmpFragment admissionEmpPage;// ÊãõÁîüÂ∞±‰∏ö
+
+	private FrameLayout mynews, walkCampus, demoSchool, shorttermTrain,
+			admissionEmp;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_main);		
+		setContentView(R.layout.activity_main);
 		setupView();
 		clickMyNews();
 	}
-	
+
 	private void setupView() {
 		mynews = (FrameLayout) findViewById(R.id.fl_mynews);
 		walkCampus = (FrameLayout) findViewById(R.id.fl_walkintocampus);
@@ -38,13 +37,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 
 		mynews.setOnClickListener(this);
 		walkCampus.setOnClickListener(this);
-		//manageStorage.setOnClickListener(this);
+		// manageStorage.setOnClickListener(this);
 		demoSchool.setOnClickListener(this);
 		shorttermTrain.setOnClickListener(this);
 		admissionEmp.setOnClickListener(this);
 
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -70,7 +69,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			break;
 		}
 	}
-	
+
 	private void clickMyNews() {
 		myNewsPage = new MyNewsFragment();
 		FragmentTransaction fragmentTransaction = this
@@ -81,11 +80,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		walkCampus.setSelected(false);
 		demoSchool.setSelected(false);
 		shorttermTrain.setSelected(false);
-		//manageStorage.setSelected(false);
+		// manageStorage.setSelected(false);
 		admissionEmp.setSelected(false);
 
 	}
-	
+
 	private void clickWalkcampus() {
 		walkCampusPage = new WalkCampusFragment();
 		FragmentTransaction fragmentTransaction = this
@@ -99,7 +98,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		admissionEmp.setSelected(false);
 
 	}
-	
+
 	private void clickDemonSchool() {
 		demoSchoolPage = new DemoSchoolFragment();
 		FragmentTransaction fragmentTransaction = this
@@ -113,7 +112,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		admissionEmp.setSelected(false);
 
 	}
-	
+
 	private void clickShorttermTrain() {
 		shorttermTrainPage = new ShorttermTrainFragment();
 		FragmentTransaction fragmentTransaction = this
@@ -127,7 +126,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		admissionEmp.setSelected(false);
 
 	}
-	
+
 	private void clickAdmissionEmp() {
 		admissionEmpPage = new AdmissionEmpFragment();
 		FragmentTransaction fragmentTransaction = this
@@ -138,7 +137,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		walkCampus.setSelected(false);
 		demoSchool.setSelected(false);
 		shorttermTrain.setSelected(false);
-		//manageStorage.setSelected(false);
+		// manageStorage.setSelected(false);
 		admissionEmp.setSelected(true);
 
 	}

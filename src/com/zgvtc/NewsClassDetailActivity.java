@@ -32,9 +32,9 @@ public class NewsClassDetailActivity extends Activity {
 	private WebView webview;
 	private ProgressBar pb;
 	private ImageView iv_return;
-	private String title;// ĞÂÎÅ±êÌâ
+	private String title;// æ–°é—»æ ‡é¢˜
 	private TextView tv_title;
-	
+
 	private Toast mToast;
 
 	// private ArrayList<>
@@ -72,7 +72,7 @@ public class NewsClassDetailActivity extends Activity {
 				NewsClassDetailActivity.this.finish();
 			}
 		});
-		
+
 	}
 
 	private void InitWebView() {
@@ -80,19 +80,19 @@ public class NewsClassDetailActivity extends Activity {
 
 		WebSettings localWebSettings = webview.getSettings();
 		localWebSettings.setJavaScriptEnabled(true);
-		localWebSettings.setSupportZoom(true);//¿ÉÒÔËõ·Å
+		localWebSettings.setSupportZoom(true);// å¯ä»¥ç¼©æ”¾
 		localWebSettings.setBuiltInZoomControls(false);
 		localWebSettings.setPluginState(WebSettings.PluginState.ON);
 		localWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		this.webview.setScrollBarStyle(0);
-		this.webview.setInitialScale(100);//³õÊ¼ÏÔÊ¾±ÈÀı100%
-		
+		this.webview.setInitialScale(100);// åˆå§‹æ˜¾ç¤ºæ¯”ä¾‹100%
+
 		this.webview.setWebViewClient(new myWebViewClient());
 		this.webview.setWebChromeClient(new myWebChromeClient());
 	}
 
 	void getData(String url) {
-		Log.d(TAG, "urlµØÖ·£º" + url);
+		Log.d(TAG, "urlåœ°å€ï¼š" + url);
 		HttpUtil.get(url, null, new JsonHttpResponseHandler() {
 			@Override
 			public void onFailure(int statusCode, Throwable error,
@@ -100,8 +100,8 @@ public class NewsClassDetailActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.onFailure(statusCode, error, content);
 				showToast(Constant.WARNING);
-				Log.d(TAG, "´íÎóÂë£º" + statusCode + ",´íÎó£º" + error.getMessage()
-						+ ",ÄÚÈİ£º" + content);
+				Log.d(TAG, "é”™è¯¯ç ï¼š" + statusCode + ",é”™è¯¯ï¼š" + error.getMessage()
+						+ ",å†…å®¹ï¼š" + content);
 			}
 
 			@Override
@@ -112,21 +112,24 @@ public class NewsClassDetailActivity extends Activity {
 					String content = URLDecoder.decode(response
 							.getString("classtext"));
 					String viewclasshtml = getFromAssets(Constant.VIEWCLASSHTML);
-					Log.d(TAG, "htmlÄÚÈİ£º" + content);
-					
-					//¸ñÊ½Ìæ»»
-					content = content.replaceAll("<p>&nbsp;</p>", "</br>")
-							.replaceAll("<div>&nbsp;", "<div>&nbsp;&nbsp;&nbsp;")
+					Log.d(TAG, "htmlå†…å®¹ï¼š" + content);
+
+					// æ ¼å¼æ›¿æ¢
+					content = content
+							.replaceAll("<p>&nbsp;</p>", "</br>")
+							.replaceAll("<div>&nbsp;",
+									"<div>&nbsp;&nbsp;&nbsp;")
 							.replaceAll("\\\\", "");
-					
-					// Ìæ»»ÄÚÈİ ±êÌâ
-					viewclasshtml = viewclasshtml.replace("Loading...", content)
-							.replace("**[title]**", title);
-					
+
+					// æ›¿æ¢å†…å®¹ æ ‡é¢˜
+					viewclasshtml = viewclasshtml
+							.replace("Loading...", content).replace(
+									"**[title]**", title);
+
 					InitWebView();
-					NewsClassDetailActivity.this.webview.loadData(viewclasshtml,
-							"text/html", "utf-8");
-					Log.d(TAG, "Ìæ»»ºó£º" + viewclasshtml);
+					NewsClassDetailActivity.this.webview.loadData(
+							viewclasshtml, "text/html", "utf-8");
+					Log.d(TAG, "æ›¿æ¢åï¼š" + viewclasshtml);
 
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -172,8 +175,9 @@ public class NewsClassDetailActivity extends Activity {
 		}
 
 	}
+
 	/**
-	 * ÏÔÊ¾ToastÏûÏ¢
+	 * æ˜¾ç¤ºToastæ¶ˆæ¯
 	 * 
 	 * @param msg
 	 */
@@ -187,9 +191,8 @@ public class NewsClassDetailActivity extends Activity {
 		mToast.show();
 	}
 
-
 	/**
-	 * »ñÈ¡AssetsÏÂµÄÎÄ¼ş
+	 * è·å–Assetsä¸‹çš„æ–‡ä»¶
 	 * 
 	 * @param fileName
 	 * @return

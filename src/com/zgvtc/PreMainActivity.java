@@ -21,7 +21,7 @@ public class PreMainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_premain);
-		this.mHandler.sendEmptyMessageDelayed(0, 2000L);// ÑÓ³Ù2sÖ®ºóÔÚÌø×ª
+		this.mHandler.sendEmptyMessageDelayed(0, 2000L);// å»¶è¿Ÿ2sä¹‹ååœ¨è·³è½¬
 	}
 
 }

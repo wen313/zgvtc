@@ -44,35 +44,39 @@ public class WalkCampusFragment extends Fragment {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				Intent it;
-				switch(position){
-				case 0://学校概况
-					it = new Intent(getActivity(), NewsClassDetailActivity.class);
+				switch (position) {
+				case 0:// 瀛︽牎姒傚喌
+					it = new Intent(getActivity(),
+							NewsClassDetailActivity.class);
 					it.putExtra("newsurl", "walkintocampus/campus_overview/");
-					it.putExtra("title", "学校概况");
+					it.putExtra("title", "瀛︽牎姒傚喌");
 					getActivity().startActivity(it);
 					break;
-				case 1://学校工作思路
-					it = new Intent(getActivity(), NewsClassDetailActivity.class);
+				case 1:// 瀛︽牎宸ヤ綔鎬濊矾
+					it = new Intent(getActivity(),
+							NewsClassDetailActivity.class);
 					it.putExtra("newsurl", "walkintocampus/campus_workpolicy/");
-					it.putExtra("title", "学校工作思路");
+					it.putExtra("title", "瀛︽牎宸ヤ綔鎬濊矾");
 					getActivity().startActivity(it);
 					break;
-				case 2://校园风貌
-					it = new Intent(getActivity(),CampustyleActivity.class);
+				case 2:// 鏍″洯椋庤矊
+					it = new Intent(getActivity(), CampustyleActivity.class);
 					it.putExtra("newsurl", "walkintocampus/campus_landscape/");
-					it.putExtra("title", "校园风貌");
+					it.putExtra("title", "鏍″洯椋庤矊");
 					getActivity().startActivity(it);
 					break;
-				case 3://学校机构
+				case 3:// 瀛︽牎鏈烘瀯
 					it = new Intent(getActivity(), NewsTitleActivity.class);
-					it.putExtra("newsTitleUrl", "walkintocampus/campus_organization/");
-					it.putExtra("title", "学校机构");
+					it.putExtra("newsTitleUrl",
+							"walkintocampus/campus_organization/");
+					it.putExtra("title", "瀛︽牎鏈烘瀯");
 					getActivity().startActivity(it);
 					break;
-				case 4://学校荣誉
+				case 4:// 瀛︽牎鑽ｈ獕
 					it = new Intent(getActivity(), NewsTitleActivity.class);
-					it.putExtra("newsTitleUrl", "walkintocampus/campus_honours/");
-					it.putExtra("title", "学校荣誉");
+					it.putExtra("newsTitleUrl",
+							"walkintocampus/campus_honours/");
+					it.putExtra("title", "瀛︽牎鑽ｈ獕");
 					getActivity().startActivity(it);
 					break;
 				}
@@ -86,27 +90,27 @@ public class WalkCampusFragment extends Fragment {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("img", R.drawable.campus_overview);
-		map.put("title", "学校概况");
+		map.put("title", "瀛︽牎姒傚喌");
 		list.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.campus_workpolicy);
-		map.put("title", "学校工作思路");
+		map.put("title", "瀛︽牎宸ヤ綔鎬濊矾");
 		list.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.campus_landscape);
-		map.put("title", "校园风貌");
+		map.put("title", "鏍″洯椋庤矊");
 		list.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.campus_organization);
-		map.put("title", "学校机构");
+		map.put("title", "瀛︽牎鏈烘瀯");
 		list.add(map);
 
 		map = new HashMap<String, Object>();
 		map.put("img", R.drawable.campus_honours);
-		map.put("title", "学校荣誉");
+		map.put("title", "瀛︽牎鑽ｈ獕");
 		list.add(map);
 		return list;
 	}
