@@ -12,8 +12,13 @@
     <!-- sd卡的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
     </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name="com.zgvtc.util.AppApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_news_logo"
         android:label="@string/app_name"
@@ -33,13 +38,21 @@
             android:windowSoftInputMode="adjustPan" >
             >
         </activity>
+
+        <receiver android:name="com.zgvtc.base.BaseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name="com.zgvtc.CampustyleActivity" >
         </activity>
         <activity android:name="com.zgvtc.NewsDetailActivity" >
         </activity>
         <activity android:name="com.zgvtc.NewsClassDetailActivity" >
         </activity>
-        <activity android:name="com.zgvtc.NewsTitleActivity"
+        <activity
+            android:name="com.zgvtc.NewsTitleActivity"
             android:windowSoftInputMode="adjustPan" >
              >
         </activity>
