@@ -53,7 +53,7 @@ public class XListView extends ListView implements OnScrollListener {
 	private boolean mIsFooterReady = false;
 	
 	// total list items, used to detect is at the bottom of listview.
-	private int mTotalItemCount;//×ÜÊı
+	private int mTotalItemCount;//æ€»æ•°
 
 	// for mScroller, scroll back from header or footer.
 	private int mScrollBack;
@@ -97,8 +97,8 @@ public class XListView extends ListView implements OnScrollListener {
 				.findViewById(R.id.xlistview_header_content);
 		mHeaderTimeView = (TextView) mHeaderView
 				.findViewById(R.id.xlistview_header_time);
-		//µÚÒ»´Î¸üĞÂµÄÊ±¼äÎª£ºÒÔºóĞèÒª¸ü¸Ä¡£
-		mHeaderTimeView.setText(new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm").format(new Date()));
+		//ç¬¬ä¸€æ¬¡æ›´æ–°çš„æ—¶é—´ä¸ºï¼šä»¥åéœ€è¦æ›´æ”¹ã€‚
+		mHeaderTimeView.setText(new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥  HH:mm").format(new Date()));
 		
 		addHeaderView(mHeaderView);
 
@@ -205,9 +205,9 @@ public class XListView extends ListView implements OnScrollListener {
 		mHeaderView.setVisiableHeight((int) delta
 				+ mHeaderView.getVisiableHeight());
 		if (mEnablePullRefresh && !mPullRefreshing) { //
-			if (mHeaderView.getVisiableHeight() > mHeaderViewHeight) {//´óÓÚÒ»°ë£¨¾ßÌå²»ÖªµÀµ½µ×ÊÇ¶àÉÙ£©¾ÍÏòÉÏ¼ıÍ·
+			if (mHeaderView.getVisiableHeight() > mHeaderViewHeight) {//å¤§äºä¸€åŠï¼ˆå…·ä½“ä¸çŸ¥é“åˆ°åº•æ˜¯å¤šå°‘ï¼‰å°±å‘ä¸Šç®­å¤´
 				mHeaderView.setState(XListViewHeader.STATE_READY);
-			} else {//ÏòÏÂ¼ıÍ·
+			} else {//å‘ä¸‹ç®­å¤´
 				mHeaderView.setState(XListViewHeader.STATE_NORMAL);
 			}
 		}
@@ -276,10 +276,10 @@ public class XListView extends ListView implements OnScrollListener {
 			mLastY = ev.getRawY();
 		}
 		switch (ev.getAction()) {
-			case MotionEvent.ACTION_DOWN://ÊÖÖ¸°´ÏÂÊÂ¼ş
+			case MotionEvent.ACTION_DOWN://æ‰‹æŒ‡æŒ‰ä¸‹äº‹ä»¶
 				mLastY = ev.getRawY();
 				break;
-			case MotionEvent.ACTION_MOVE://ÊÖÖ¸ÒÆ¶¯ÊÂ¼ş
+			case MotionEvent.ACTION_MOVE://æ‰‹æŒ‡ç§»åŠ¨äº‹ä»¶
 				final float deltaY = ev.getRawY() - mLastY;
 				mLastY = ev.getRawY();
 				if (getFirstVisiblePosition() == 0
@@ -293,7 +293,7 @@ public class XListView extends ListView implements OnScrollListener {
 					updateFooterHeight(-deltaY / OFFSET_RADIO);
 				}
 				break;
-			case MotionEvent.ACTION_UP://·Å¿ªÊÂ¼ş
+			case MotionEvent.ACTION_UP://æ”¾å¼€äº‹ä»¶
 				mLastY = -1; // reset
 				if (getFirstVisiblePosition() == 0) {
 					// invoke refresh

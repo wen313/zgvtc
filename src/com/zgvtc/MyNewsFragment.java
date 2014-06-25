@@ -1,6 +1,5 @@
 package com.zgvtc;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,7 +41,6 @@ import com.zgvtc.nets.NetworkUtils;
 import com.zgvtc.util.AppApplication;
 import com.zgvtc.util.ConfigCache;
 import com.zgvtc.util.Constant;
-import com.zgvtc.util.FileUtils;
 import com.zgvtc.view.SegmentedGroup;
 import com.zgvtc.view.XListView;
 import com.zgvtc.view.XListView.IXListViewListener;

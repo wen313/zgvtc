@@ -78,8 +78,8 @@ public class NewsDetailActivity extends Activity {
 		WebSettings localWebSettings = webview.getSettings();
 		localWebSettings.setJavaScriptEnabled(true);
 		localWebSettings.setSupportZoom(true);// 可以缩放
-		localWebSettings.setBuiltInZoomControls(false);
-		localWebSettings.setPluginState(WebSettings.PluginState.ON);
+		localWebSettings.setBuiltInZoomControls(true);
+		localWebSettings.setUseWideViewPort(true);//将图片调整到适合WebView大小，设置该属性可通过双击或手指移动实现缩放
 		localWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		this.webview.setScrollBarStyle(0);
 		this.webview.setInitialScale(100);// 初始显示比例100%

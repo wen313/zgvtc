@@ -10,8 +10,8 @@ import android.util.Log;
 public class ConfigCache {
 	private static final String TAG = ConfigCache.class.getName();
 
-	public static final int CONFIG_CACHE_MOBILE_TIMEOUT = 3600000; // 1 hour
-	public static final int CONFIG_CACHE_WIFI_TIMEOUT = 300000; // 5 minute
+	public static final int CONFIG_CACHE_MOBILE_TIMEOUT = 3600000; // 1 hour：mobile过期时间
+	public static final int CONFIG_CACHE_WIFI_TIMEOUT = 600000; // 10 minute:wifi过期时间
 
 	public static String getUrlCache(String url) {
 		if (url == null) {
