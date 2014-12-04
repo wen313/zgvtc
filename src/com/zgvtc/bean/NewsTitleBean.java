@@ -3,7 +3,7 @@ package com.zgvtc.bean;
 public class NewsTitleBean {
 	private String id;
 	private String classid;
-	private String newspath;
+	private String newstime;
 	private String title;
 
 	public String getId() {
@@ -22,12 +22,12 @@ public class NewsTitleBean {
 		this.classid = classid;
 	}
 
-	public String getNewspath() {
-		return newspath;
+	public String getNewstime() {
+		return newstime;
 	}
 
-	public void setNewspath(String newspath) {
-		this.newspath = newspath;
+	public void setNewstime(String newstime) {
+		this.newstime = newstime;
 	}
 
 	public String getTitle() {

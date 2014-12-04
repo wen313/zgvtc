@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
@@ -28,6 +29,8 @@ public class DemoSchoolFragment extends Fragment {
 	private ExpandableListView elv_demoschool;
 	private List<Map<String, Object>> group = null;
 	private List<List<Map<String, Object>>> buddy = null;
+	//下载管理
+	private ImageView iv_download;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,18 +109,28 @@ public class DemoSchoolFragment extends Fragment {
 		// 栏目三
 		child = new ArrayList<Map<String, Object>>();
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "物化成果");
-		childmap.put("id", 118);
+		childmap.put("title", "宣传视频");
+		childmap.put("id", 147);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "非物化成果");
-		childmap.put("id", 119);
+		childmap.put("title", "总结报告");
+		childmap.put("id", 148);
 		child.add(childmap);
 
 		childmap = new HashMap<String, Object>();
-		childmap.put("title", "阶段成果");
-		childmap.put("id", 120);
+		childmap.put("title", "典型案例");
+		childmap.put("id", 76);
+		child.add(childmap);
+		
+		childmap = new HashMap<String, Object>();
+		childmap.put("title", "直接成果");
+		childmap.put("id", 77);
+		child.add(childmap);
+		
+		childmap = new HashMap<String, Object>();
+		childmap.put("title", "其他成果");
+		childmap.put("id", 78);
 		child.add(childmap);
 
 		buddy.add(child);
@@ -127,6 +140,7 @@ public class DemoSchoolFragment extends Fragment {
 	}
 
 	private void setUpView(View view) {
+		iv_download = (ImageView) view.findViewById(R.id.iv_download);
 		elv_demoschool = (ExpandableListView) view
 				.findViewById(R.id.elv_demoschool);
 		ExpandableListAdapter adapter = new BuddyAdapter(getActivity(), group,
@@ -161,6 +175,16 @@ public class DemoSchoolFragment extends Fragment {
 					getActivity().startActivity(it);
 				}
 				return false;
+			}
+		});
+		
+		iv_download.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it = new Intent(getActivity(),DownLoadManageActivity.class);
+				getActivity().startActivity(it);
 			}
 		});
 	}

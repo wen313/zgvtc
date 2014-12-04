@@ -108,7 +108,7 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 				NewsTitleBean ntb = contents.get(position - 1);
 				Intent it = new Intent(getActivity(), NewsDetailActivity.class);
 				it.putExtra("newsurl", "news/news_detail/" + ntb.getId());
-				it.putExtra("date", ntb.getNewspath());
+				it.putExtra("date", ntb.getNewstime());
 				it.putExtra("title", ntb.getTitle());
 				getActivity().startActivity(it);
 			}
@@ -168,7 +168,7 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		for (NewsTitleBean ntb : contents) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("date", ntb.getNewspath());
+			map.put("date", ntb.getNewstime());
 			map.put("title", ntb.getTitle());
 			map.put("id", ntb.getId());
 			data.add(map);
@@ -317,6 +317,7 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 					ConfigCache.setUrlCache(result, url);
 					contents.clear();
 					showNewsList(result);
+					showToast(Constant.SUCCESS);
 				}
 
 				@Override
@@ -427,7 +428,7 @@ public class MyNewsFragment extends Fragment implements IXListViewListener,
 						android.R.color.white));
 			}
 			NewsTitleBean ntb = contents.get(position);
-			holder.tv_news_date.setText(ntb.getNewspath());
+			holder.tv_news_date.setText(ntb.getNewstime());
 			holder.tv_news_title.setText(ntb.getTitle());
 			return convertView;
 		}

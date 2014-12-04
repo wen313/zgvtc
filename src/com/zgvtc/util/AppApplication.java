@@ -35,7 +35,6 @@ public class AppApplication extends BaseApplication {
 	public void initEnv() {
 		// TODO Auto-generated method stub
 		mAppName = Constant.APPNAME;
-		mDownloadPath = "/"+Constant.APPNAME+"/download";
 		if (Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
 			File file = new File(Environment.getExternalStorageDirectory()
@@ -47,6 +46,18 @@ public class AppApplication extends BaseApplication {
 			} else {
 				mSdcardDataDir = file.getAbsolutePath();
 			}
+			
+			//下载路径
+			File downloadfile = new File(Environment.getExternalStorageDirectory()
+					.getPath() + "/"+Constant.APPNAME+"/download/");
+			if (!downloadfile.exists()) {
+				if (downloadfile.mkdirs()) {
+					mDownloadPath = downloadfile.getAbsolutePath();
+				}
+			} else {
+				mDownloadPath = downloadfile.getAbsolutePath();
+			}
+			
 		}
 
 		mNetWorkState = NetworkUtils.getNetworkState(this);

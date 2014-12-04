@@ -75,7 +75,7 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 				Intent it = new Intent(NewsTitleActivity.this,
 						NewsDetailActivity.class);
 				it.putExtra("newsurl", "news/news_detail/" + ntb.getId());
-				it.putExtra("date", ntb.getNewspath());
+				it.putExtra("date", ntb.getNewstime());
 				it.putExtra("title", ntb.getTitle());
 				NewsTitleActivity.this.startActivity(it);
 			}
@@ -231,7 +231,7 @@ public class NewsTitleActivity extends Activity implements IXListViewListener,
 						android.R.color.white));
 			}
 			NewsTitleBean ntb = contents.get(position);
-			holder.tv_news_date.setText(ntb.getNewspath());
+			holder.tv_news_date.setText(ntb.getNewstime());
 			holder.tv_news_title.setText(ntb.getTitle());
 			return convertView;
 		}

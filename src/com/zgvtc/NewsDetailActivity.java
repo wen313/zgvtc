@@ -8,12 +8,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.zgvtc.nets.HttpUtil;
 import com.zgvtc.util.Constant;
+import com.zgvtc.util.DownloadFileAsyncTask;
 
 public class NewsDetailActivity extends Activity {
 	private String TAG = "NewsDetailActivity";
@@ -33,7 +38,7 @@ public class NewsDetailActivity extends Activity {
 	private ImageView iv_return;
 	private String date;// 新闻时间发布时间
 	private String title;// 新闻标题
-
+	private DownloadFileAsyncTask downLoadFileAsyncTask;
 	private Toast mToast;
 
 	// private ArrayList<>
@@ -61,13 +66,48 @@ public class NewsDetailActivity extends Activity {
 	}
 
 	private void setUpEvent() {
+		this.webview.setDownloadListener(new DownloadListener() {// 下载监听器
+
+					@Override
+					public void onDownloadStart(final String url,
+							String userAgent, String contentDisposition,
+							String mimetype, long contentLength) {
+						// TODO Auto-generated method stub
+						Log.d(TAG, "下载事件");
+
+						new AlertDialog.Builder(NewsDetailActivity.this)
+								.setTitle("提示")
+								.setMessage("你确认要下载文件？")
+								.setPositiveButton("确认",
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface paramDialogInterface,
+													int paramInt) {// 下载文件
+												DownLoadFile(url);
+											}
+										})
+								.setNegativeButton("取消",
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface paramDialogInterface,
+													int paramInt) {
+												paramDialogInterface.dismiss();
+											}
+										}).show();
+					}
+				});
+
 		this.pb.setVisibility(ProgressBar.VISIBLE);
 		this.pb.setMax(100);
 		iv_return.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				NewsDetailActivity.this.finish();
+				if (webview.canGoBack()) {
+					webview.goBack();
+				} else {
+					NewsDetailActivity.this.finish();
+				}
 			}
 		});
 	}
@@ -79,7 +119,7 @@ public class NewsDetailActivity extends Activity {
 		localWebSettings.setJavaScriptEnabled(true);
 		localWebSettings.setSupportZoom(true);// 可以缩放
 		localWebSettings.setBuiltInZoomControls(true);
-		localWebSettings.setUseWideViewPort(true);//将图片调整到适合WebView大小，设置该属性可通过双击或手指移动实现缩放
+		// localWebSettings.setUseWideViewPort(true);//将图片调整到适合WebView大小，设置该属性可通过双击或手指移动实现缩放
 		localWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		this.webview.setScrollBarStyle(0);
 		this.webview.setInitialScale(100);// 初始显示比例100%
@@ -215,6 +255,13 @@ public class NewsDetailActivity extends Activity {
 		}
 	}
 
+	private void DownLoadFile(String url) {
+		Log.d(TAG, "url:" + url);
+		downLoadFileAsyncTask = new DownloadFileAsyncTask(NewsDetailActivity.this);
+		downLoadFileAsyncTask.execute(url);
+	}
+
+
 	class myWebChromeClient extends WebChromeClient {
 		@Override
 		public void onProgressChanged(WebView view, int newProgress) {
@@ -227,4 +274,5 @@ public class NewsDetailActivity extends Activity {
 			super.onProgressChanged(view, newProgress);
 		}
 	}
+
 }
