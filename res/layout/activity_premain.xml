@@ -8,7 +8,6 @@
         android:id="@+id/iv_prelogin"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/premain" />
+        android:background="@drawable/premain" />
 
 </RelativeLayout>

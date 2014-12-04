@@ -8,6 +8,8 @@
     <color name="newsdatetextcolor">#bb000000</color>
     
     <color name="radio_button_selected_color">#ffffffff</color>
+    <color name="button_normal_color">#58C9E5</color>
+    <color name="button_press_color">#58F9E5</color>
     <color name="radio_button_unselected_color">@android:color/transparent</color>
     <color name="divider_bg">#c8c7cc</color>
 </resources>
