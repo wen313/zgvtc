@@ -34,6 +34,7 @@ public abstract class BaseApplication extends Application {
 		//fillTabs();
 		//initDb();
 		initEnv();
+		copyWelFile();
 		//initLocalVersion();
 	}
 
@@ -62,6 +63,8 @@ public abstract class BaseApplication extends Application {
 	public abstract void initDb();
 
 	public abstract void initEnv();
+	
+	public abstract void copyWelFile();
 
 	public abstract void exitApp(Context context);
 

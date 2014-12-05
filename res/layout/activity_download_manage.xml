@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <!-- 测试代码...... -->
+
     <RelativeLayout
         android:id="@+id/relativelayout_top"
         android:layout_width="fill_parent"
@@ -34,14 +35,16 @@
             android:textSize="18.0dip" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_download"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+    <com.zgvtc.view.ListViewCompat
+        android:id="@+id/lvc_download"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/relativelayout_top"
         android:cacheColorHint="@color/transparent"
         android:divider="@color/divider_bg"
         android:dividerHeight="1.0dp"
-        android:listSelector="@drawable/listview_item_selector" />
+        android:drawSelectorOnTop="false"
+        android:listSelector="@drawable/listview_item_selector"
+        android:scrollbars="none" />
 
 </RelativeLayout>
